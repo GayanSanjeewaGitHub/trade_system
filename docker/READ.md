@@ -352,6 +352,3 @@ For issues and questions:
 **Built with ❤️ using FastAPI, LangGraph, Pinecone, and Langfuse**
 
 uv add "packageA" "packageB"
-
- 
-docker build -f docker/Dockerfile -t trading-chatbot .

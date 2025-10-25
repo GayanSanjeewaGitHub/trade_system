@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What are the trading fees?",
+    "expected_answer": "The platform charges 0.1% per transaction for stock trades with no monthly maintenance fees.",
+    "category": "faq"
+  },
+  {
+    "question": "What is the minimum deposit?",
+    "expected_answer": "The minimum initial deposit is $100, though $500 is recommended for diversified trading.",
+    "category": "faq"
+  },
+  {
+    "question": "How long does withdrawal take?",
+    "expected_answer": "Standard withdrawals take 1-3 business days. Expedited withdrawals are processed within 24 hours for a $25 fee.",
+    "category": "faq"
+  },
+  {
+    "question": "What types of orders are supported?",
+    "expected_answer": "The platform supports market orders, limit orders, stop-loss orders, and stop-limit orders. Advanced users can access bracket orders and trailing stops.",
+    "category": "faq"
+  },
+  {
+    "question": "Is margin trading available?",
+    "expected_answer": "Yes, margin trading is available for approved accounts with a minimum equity of $2,000. You can borrow up to 2x your account value.",
+    "category": "faq"
+  },
+  {
+    "question": "What is the current price of AAPL?",
+    "expected_answer": "The current price varies. I'll fetch the real-time price for you.",
+    "category": "advisor"
+  },
+  {
+    "question": "Buy 10 shares of AAPL",
+    "expected_answer": "I'll execute a buy order for 10 shares of AAPL at the current market price.",
+    "category": "advisor"
+  },
+  {
+    "question": "Show my portfolio",
+    "expected_answer": "Here is your current portfolio with holdings and cash balance.",
+    "category": "advisor"
+  },
+  {
+    "question": "Calculate my budget if I earn $5000 and spend $3000",
+    "expected_answer": "With $5000 income and $3000 expenses, you have $2000 available for investment.",
+    "category": "advisor"
+  },
+  {
+    "question": "What is the pattern day trader rule?",
+    "expected_answer": "The pattern day trader rule requires a minimum of $25,000 in your account if you make 4 or more day trades within 5 business days.",
+    "category": "faq"
+  }
+]

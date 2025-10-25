@@ -1,0 +1,31 @@
+Frequently Asked Questions - Trading Platform
+
+Q: What are the trading fees?
+A: Our platform charges a competitive fee of 0.1% per transaction for stock trades. There are no monthly account maintenance fees. Commission-free trading is available for accounts with a balance over $10,000.
+
+Q: How do I create an account?
+A: You can create an account by visiting our website and clicking "Sign Up". You'll need to provide your email, create a password, and complete identity verification. The process typically takes 5-10 minutes.
+
+Q: What are the minimum deposit requirements?
+A: The minimum initial deposit is $100. However, we recommend starting with at least $500 to have sufficient funds for diversified trading.
+
+Q: What types of orders can I place?
+A: We support market orders, limit orders, stop-loss orders, and stop-limit orders. Advanced users can also access bracket orders and trailing stops.
+
+Q: How long does it take to withdraw funds?
+A: Standard withdrawals are processed within 1-3 business days. Expedited withdrawals (available for a $25 fee) can be processed within 24 hours.
+
+Q: Is my money safe?
+A: Yes, all accounts are SIPC insured up to $500,000. We also use bank-level encryption and two-factor authentication to protect your account.
+
+Q: What markets can I trade?
+A: You can trade US stocks (NYSE, NASDAQ), ETFs, and options. International markets are available for premium accounts.
+
+Q: Do you offer margin trading?
+A: Yes, margin trading is available for approved accounts. You must maintain a minimum equity of $2,000 and can borrow up to 2x your account value.
+
+Q: How do I contact customer support?
+A: Our customer support team is available 24/7 via live chat, email (support@tradingplatform.com), or phone (1-800-TRADE-24).
+
+Q: Can I trade on mobile?
+A: Yes, we have mobile apps for both iOS and Android devices with full trading functionality.

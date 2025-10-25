@@ -1,0 +1,53 @@
+Trading Platform Policies
+
+ACCOUNT POLICIES
+
+1. Account Opening
+- Must be 18 years or older
+- Valid government-issued ID required
+- SSN or EIN required for US residents
+- Proof of address required
+
+2. Account Security
+- Two-factor authentication recommended
+- Password must be at least 12 characters
+- Regular security audits performed
+- Suspicious activity monitored 24/7
+
+3. Trading Policies
+- Trading hours: 9:30 AM - 4:00 PM ET (regular market hours)
+- Extended hours: 4:00 AM - 9:30 AM ET and 4:00 PM - 8:00 PM ET
+- Pattern day trader rule applies (4 or more day trades in 5 business days requires $25,000 minimum)
+- Good faith violations result in trading restrictions
+
+RISK DISCLOSURE
+
+Trading stocks involves risk of loss. Past performance does not guarantee future results. You should carefully consider your financial situation and risk tolerance before trading.
+
+Margin Trading Risks:
+- Can lose more than initial investment
+- Interest charges apply to borrowed funds
+- Margin calls may require immediate deposit
+- Forced liquidation possible if maintenance requirements not met
+
+PRIVACY POLICY
+
+We collect and use your information to:
+- Process trades and maintain your account
+- Comply with legal requirements
+- Improve our services
+- Send important account notifications
+
+We never sell your personal information to third parties.
+
+FEES AND CHARGES
+
+Stock Trades: 0.1% per transaction
+Options Trades: $0.65 per contract
+Wire Transfers: $25 outgoing, free incoming
+Paper Statements: $2 per month
+Account Inactivity: $10 per month after 12 months of no activity
+
+DISPUTE RESOLUTION
+
+All disputes must be resolved through binding arbitration. Class action lawsuits are not permitted. You have 60 days to opt out of the arbitration clause.
