@@ -148,57 +148,97 @@ class RAGRetriever:
         Returns:
             List of relevant documents with scores
         """
-        try:
-            if not self.vector_store:
-                logger.warning("Vector store not initialized, returning empty results")
-                return []
+        max_retries = 2
+        for attempt in range(max_retries):
+            try:
+                if not self.vector_store:
+                    logger.warning("Vector store not initialized, returning empty results")
+                    return []
+                    
+                logger.info("Retrieving documents", query_length=len(query), top_k=top_k, attempt=attempt + 1)
                 
-            logger.info("Retrieving documents", query_length=len(query), top_k=top_k)
-            
-            # Search in vector store (use sync method for FAISS, async for Pinecone)
-            if self.use_faiss_fallback:
-                # Run synchronous FAISS operation in thread pool to avoid blocking
-                results = await asyncio.to_thread(
-                    self.vector_store.similarity_search_with_score,
-                    query=query,
-                    k=top_k,
-                    filter=filter_dict
+                # Search in vector store (use sync method for FAISS, async for Pinecone)
+                if self.use_faiss_fallback:
+                    # Run synchronous FAISS operation in thread pool to avoid blocking
+                    results = await asyncio.to_thread(
+                        self.vector_store.similarity_search_with_score,
+                        query=query,
+                        k=top_k,
+                        filter=filter_dict
+                    )
+                else:
+                    results = await self.vector_store.asimilarity_search_with_score(
+                        query=query,
+                        k=top_k,
+                        filter=filter_dict
+                    )
+                
+                # Format results
+                formatted_results = []
+                all_scores = []
+                for doc, score in results:
+                    all_scores.append(float(score))
+                    # Include all results, let the agent decide relevance
+                    # Only filter out extremely low scores (< 0.3 for cosine similarity)
+                    if score >= 0.3:
+                        formatted_results.append({
+                            "content": doc.page_content,
+                            "metadata": doc.metadata,
+                            "score": float(score),
+                            "source": doc.metadata.get("source", "Unknown")
+                        })
+                
+                logger.info(
+                    "Documents retrieved",
+                    count=len(formatted_results),
+                    total_found=len(results),
+                    avg_score=sum(r["score"] for r in formatted_results) / len(formatted_results) if formatted_results else 0,
+                    all_scores=all_scores[:5]  # Log first 5 scores for debugging
                 )
-            else:
-                results = await self.vector_store.asimilarity_search_with_score(
-                    query=query,
-                    k=top_k,
-                    filter=filter_dict
-                )
-            
-            # Format results
-            formatted_results = []
-            all_scores = []
-            for doc, score in results:
-                all_scores.append(float(score))
-                # Include all results, let the agent decide relevance
-                # Only filter out extremely low scores (< 0.3 for cosine similarity)
-                if score >= 0.3:
-                    formatted_results.append({
-                        "content": doc.page_content,
-                        "metadata": doc.metadata,
-                        "score": float(score),
-                        "source": doc.metadata.get("source", "Unknown")
-                    })
-            
-            logger.info(
-                "Documents retrieved",
-                count=len(formatted_results),
-                total_found=len(results),
-                avg_score=sum(r["score"] for r in formatted_results) / len(formatted_results) if formatted_results else 0,
-                all_scores=all_scores[:5]  # Log first 5 scores for debugging
-            )
-            
-            return formatted_results
-            
-        except Exception as e:
-            logger.error("Document retrieval failed", error=str(e), exc_info=True)
-            return []
+                
+                return formatted_results
+                
+            except RuntimeError as e:
+                if "Session is closed" in str(e) and attempt < max_retries - 1:
+                    logger.warning(
+                        "Session closed error detected, reinitializing Pinecone connection",
+                        attempt=attempt + 1,
+                        max_retries=max_retries
+                    )
+                    # Reinitialize the Pinecone connection completely
+                    try:
+                        if not self.use_faiss_fallback and self.pc and self.index:
+                            # Recreate the Pinecone client and index connection
+                            self.pc = Pinecone(api_key=settings.pinecone_api_key)
+                            self.index = self.pc.Index(settings.pinecone_index_name)
+                            
+                            # Recreate embeddings client
+                            self.embeddings = self._create_embeddings()
+                            
+                            # Recreate vector store with new connections
+                            self.vector_store = PineconeVectorStore(
+                                index=self.index,
+                                embedding=self.embeddings,
+                                text_key="content"
+                            )
+                            logger.info("Pinecone connection reinitialized successfully")
+                            
+                            # Wait a bit before retrying
+                            await asyncio.sleep(0.5)
+                            continue
+                    except Exception as reinit_error:
+                        logger.error("Failed to reinitialize Pinecone", error=str(reinit_error))
+                        # Fall through to return empty results
+                        break
+                else:
+                    logger.error("Document retrieval failed after retries", error=str(e), exc_info=True)
+                    break
+                    
+            except Exception as e:
+                logger.error("Document retrieval failed", error=str(e), exc_info=True)
+                break
+        
+        return []
     
     async def add_documents(
         self,
@@ -213,48 +253,78 @@ class RAGRetriever:
         Returns:
             Result dict with success status
         """
-        try:
-            if not self.vector_store:
-                logger.warning("Vector store not initialized, cannot add documents")
+        max_retries = 2
+        for attempt in range(max_retries):
+            try:
+                if not self.vector_store:
+                    logger.warning("Vector store not initialized, cannot add documents")
+                    return {
+                        "success": False,
+                        "error": "Vector store not initialized"
+                    }
+                    
+                logger.info("Adding documents to vector store", count=len(documents), attempt=attempt + 1)
+                
+                texts = [doc["content"] for doc in documents]
+                metadatas = [doc.get("metadata", {}) for doc in documents]
+                
+                # Add to vector store (use sync method for FAISS, async for Pinecone)
+                if self.use_faiss_fallback:
+                    # Run synchronous FAISS operation in thread pool to avoid blocking
+                    await asyncio.to_thread(
+                        self.vector_store.add_texts,
+                        texts=texts,
+                        metadatas=metadatas
+                    )
+                    ids = [f"faiss_{i}" for i in range(len(texts))]
+                else:
+                    ids = await self.vector_store.aadd_texts(
+                        texts=texts,
+                        metadatas=metadatas
+                    )
+                
+                logger.info("Documents added successfully", ids_count=len(ids))
+                
                 return {
-                    "success": False,
-                    "error": "Vector store not initialized"
+                    "success": True,
+                    "ids": ids,
+                    "count": len(ids)
                 }
                 
-            logger.info("Adding documents to vector store", count=len(documents))
-            
-            texts = [doc["content"] for doc in documents]
-            metadatas = [doc.get("metadata", {}) for doc in documents]
-            
-            # Add to vector store (use sync method for FAISS, async for Pinecone)
-            if self.use_faiss_fallback:
-                # Run synchronous FAISS operation in thread pool to avoid blocking
-                await asyncio.to_thread(
-                    self.vector_store.add_texts,
-                    texts=texts,
-                    metadatas=metadatas
-                )
-                ids = [f"faiss_{i}" for i in range(len(texts))]
-            else:
-                ids = await self.vector_store.aadd_texts(
-                    texts=texts,
-                    metadatas=metadatas
-                )
-            
-            logger.info("Documents added successfully", ids_count=len(ids))
-            
-            return {
-                "success": True,
-                "ids": ids,
-                "count": len(ids)
-            }
-            
-        except Exception as e:
-            logger.error("Failed to add documents", error=str(e), exc_info=True)
-            return {
-                "success": False,
-                "error": str(e)
-            }
+            except RuntimeError as e:
+                if "Session is closed" in str(e) and attempt < max_retries - 1:
+                    logger.warning(
+                        "Session closed error during add_documents, reinitializing",
+                        attempt=attempt + 1
+                    )
+                    try:
+                        if not self.use_faiss_fallback and self.pc and self.index:
+                            # Reinitialize Pinecone connection
+                            self.pc = Pinecone(api_key=settings.pinecone_api_key)
+                            self.index = self.pc.Index(settings.pinecone_index_name)
+                            self.embeddings = self._create_embeddings()
+                            self.vector_store = PineconeVectorStore(
+                                index=self.index,
+                                embedding=self.embeddings,
+                                text_key="content"
+                            )
+                            await asyncio.sleep(0.5)
+                            continue
+                    except Exception as reinit_error:
+                        logger.error("Failed to reinitialize during add_documents", error=str(reinit_error))
+                        break
+                else:
+                    logger.error("Failed to add documents after retries", error=str(e), exc_info=True)
+                    break
+                    
+            except Exception as e:
+                logger.error("Failed to add documents", error=str(e), exc_info=True)
+                break
+        
+        return {
+            "success": False,
+            "error": "Failed to add documents after retries"
+        }
     
     async def delete_documents(self, ids: List[str]) -> Dict[str, Any]:
         """Delete documents by IDs."""
