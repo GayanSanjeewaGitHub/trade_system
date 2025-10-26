@@ -1,0 +1,14 @@
+# MCP Server Requirements
+
+# Official MCP SDK
+mcp>=1.0.0
+
+# Async support
+asyncio-atexit>=1.0.1
+
+# Logging
+structlog>=24.1.0
+
+# Optional: HTTP server support
+uvicorn>=0.27.0
+fastapi>=0.109.0

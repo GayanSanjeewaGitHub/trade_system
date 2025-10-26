@@ -1,6 +1,34 @@
 # Financial Trading Platform Chatbot
 
-A production-ready agentic chatbot for financial trading operations with RAG, multi-agent orchestration, tool integration, and comprehensive monitoring.
+A production-ready agentic chatbot for financial trading operations with RAG, multi-agent orchestration, **Real MCP Server**, tool integration, and comprehensive monitoring.
+
+## 🎯 New Features: Real MCP Trading Server
+
+**Standalone MCP server using official Model Context Protocol:**
+- ✅ **Real MCP Server**: Runs independently in Docker
+- ✅ **Standard Protocol**: JSON-RPC 2.0 via stdio/HTTP
+- ✅ **40 CSE Stocks**: Real stock data across 9 sectors
+- ✅ **9 Trading Tools**: Stock queries, orders, budget calculations
+- ✅ **Order Queue**: 3-minute processing with cancellation
+- ✅ **MCP Client**: Connect from any MCP-compatible app
+
+👉 **[Real MCP Server Guide](docs/REAL_MCP_SERVER.md)**  
+👉 **[MCP Implementation Details](docs/MCP_TRADING_SERVER.md)**
+
+
+
+Quick Setup:
+Fill Envs
+Start with:(on root)
+docker-compose -f docker/docker-compose.yml up --build
+
+MCP server
+cd mcp_server
+docker compose up -d --build
+
+front end 
+cd .\frontend\
+.\START.bat
 
 Screen Shots :
 Home Page
@@ -26,6 +54,9 @@ FAQ Agent Usage
 Advisor Agent Usage
 ![alt text](image-3.png)
 
+MCP tools
+![alt text](image-14.png)
+![alt text](image-15.png)
 
 
 matrixs :
@@ -111,12 +142,13 @@ trading-chatbot/
 │   │   ├── __init__.py
 │   │   ├── controller.py          # Main controller agent
 │   │   ├── faq_agent.py           # FAQ retrieval agent
-│   │   └── advisor_agent.py       # Trading advisor agent
+│   │   └── advisor_agent.py       # Trading advisor agent (MCP-enabled)
 │   ├── tools/
 │   │   ├── __init__.py
 │   │   ├── stock_tools.py         # Stock price & trading tools
 │   │   ├── budget_tools.py        # Budget calculation tools
-│   │   └── mcp_tools.py           # MCP-based tools
+│   │   ├── mcp_tools.py           # MCP-based tools
+│   │   └── mcp_trading_server.py  # 🆕 MCP Trading Server
 │   ├── rag/
 │   │   ├── __init__.py
 │   │   ├── ingestion.py           # Document ingestion pipeline
@@ -131,9 +163,20 @@ trading-chatbot/
 │   ├── models/
 │   │   ├── __init__.py
 │   │   └── schemas.py             # Pydantic models
+│   ├── data/
+│   │   ├── faq.txt
+│   │   ├── policies.txt
+│   │   ├── product_info.txt
+│   │   ├── cse_stock_data.csv     # 🆕 40 CSE stocks
+│   │   └── ground_truth/
+│   │       └── test_qa_pairs.json
 │   └── utils/
 │       ├── __init__.py
 │       └── helpers.py             # Utility functions
+├── scripts/
+│   ├── deploy.ps1                 # Deployment automation
+│   ├── health_check.ps1           # Health monitoring
+│   └── test_mcp_server.py         # 🆕 MCP server tests
 ├── data/
 │   ├── documents/                 # FAQ, policies, product info
 │   │   ├── faq.txt
@@ -919,11 +962,8 @@ function Start-TradingFrontend { cd frontend; .\START.bat; cd .. }
 ---
 
 
-Start with:
-docker-compose -f docker/docker-compose.yml up --build
 
-front end 
-cd .\frontend\
-.\START.bat
+
+
 
 **Built with ❤️ using FastAPI, LangGraph, Pinecone, and Langfuse**

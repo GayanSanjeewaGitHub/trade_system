@@ -1,0 +1,26 @@
+services:
+  mcp-trading-server:
+    build:
+      context: ..
+      dockerfile: mcp_server/Dockerfile
+    container_name: cse-trading-mcp-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../src/data:/app/src/data:ro
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    networks:
+      - trading-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  trading-network:
+    driver: bridge
