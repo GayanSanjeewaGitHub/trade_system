@@ -24,6 +24,20 @@ class RAGRetriever:
         self.embeddings: Optional[OpenAIEmbeddings] = None
         self.vector_store: Optional[PineconeVectorStore] = None
         self.use_faiss_fallback: bool = False
+        self._embeddings_initialized: bool = False
+    
+    def _create_embeddings(self) -> OpenAIEmbeddings:
+        """Create a new embeddings instance with optimal settings."""
+        return OpenAIEmbeddings(
+            model=settings.embedding_model,
+            api_key=settings.openai_api_key,
+            max_retries=5,
+            request_timeout=180,
+            show_progress_bar=False,
+            chunk_size=200,
+            tiktoken_enabled=True,
+            tiktoken_model_name=None,
+        )
     
     async def initialize(self) -> None:
         """Initialize Pinecone connection and embeddings with FAISS fallback."""
@@ -35,13 +49,9 @@ class RAGRetriever:
                 logger.warning("OpenAI API key not configured, RAG retriever will be disabled")
                 return
             
-            # Initialize embeddings first (with max_retries to handle session issues)
-            self.embeddings = OpenAIEmbeddings(
-                model=settings.embedding_model,
-                api_key=settings.openai_api_key,
-                max_retries=3,
-                timeout=60
-            )
+            # Initialize embeddings using helper method
+            self.embeddings = self._create_embeddings()
+            self._embeddings_initialized = True
             
             # Try to initialize Pinecone
             if not settings.pinecone_api_key or settings.pinecone_api_key == "your-pinecone-api-key" or settings.pinecone_api_key == "YOUR_ACTUAL_PINECONE_API_KEY_HERE":
@@ -299,7 +309,45 @@ class RAGRetriever:
             logger.error("Failed to get stats", error=str(e))
             return {}
     
+    async def refresh_embeddings(self) -> None:
+        """Refresh the embeddings client to resolve session issues."""
+        try:
+            logger.info("Refreshing embeddings client")
+            old_embeddings = self.embeddings
+            
+            # Create new embeddings instance
+            self.embeddings = self._create_embeddings()
+            
+            # Update vector store with new embeddings if using Pinecone
+            if not self.use_faiss_fallback and self.index:
+                self.vector_store = PineconeVectorStore(
+                    index=self.index,
+                    embedding=self.embeddings,
+                    text_key="content"
+                )
+                logger.info("Vector store updated with new embeddings client")
+            
+            # Clean up old embeddings (if it has a close method)
+            if old_embeddings and hasattr(old_embeddings, 'client') and hasattr(old_embeddings.client, 'close'):
+                try:
+                    old_embeddings.client.close()
+                except:
+                    pass
+                    
+        except Exception as e:
+            logger.error("Failed to refresh embeddings", error=str(e))
+            raise
+    
     async def cleanup(self) -> None:
         """Cleanup resources."""
         logger.info("Cleaning up RAG retriever")
+        
+        # Close embeddings client if it exists
+        if self.embeddings and hasattr(self.embeddings, 'client'):
+            try:
+                if hasattr(self.embeddings.client, 'close'):
+                    self.embeddings.client.close()
+            except:
+                pass
+        
         # Pinecone connections are automatically managed

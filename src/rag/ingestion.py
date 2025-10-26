@@ -3,6 +3,7 @@ Document ingestion pipeline for RAG system.
 Handles PDF processing, chunking, and vector storage.
 """
 
+import asyncio
 import hashlib
 from typing import List, Dict, Any, Optional
 from pathlib import Path
@@ -70,6 +71,14 @@ class DocumentIngestion:
         try:
             logger.info("Ingesting document", filename=filename, type=document_type)
             
+            # Ensure retriever is initialized
+            if not self.retriever or not self.retriever.vector_store:
+                logger.warning("Retriever not initialized, reinitializing...")
+                await self.initialize()
+                
+            if not self.retriever or not self.retriever.vector_store:
+                raise Exception("Failed to initialize retriever")
+            
             # Extract text based on file type
             if filename.endswith(".pdf"):
                 text = await self._extract_pdf_text(content)
@@ -100,24 +109,43 @@ class DocumentIngestion:
                     }
                 })
             
-            # Add to vector store
-            result = await self.retriever.add_documents(documents)
+            # Add to vector store with retry logic
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    result = await self.retriever.add_documents(documents)
+                    
+                    if result["success"]:
+                        logger.info(
+                            "Document ingested successfully",
+                            filename=filename,
+                            chunks=len(chunks)
+                        )
+                        
+                        return {
+                            "success": True,
+                            "filename": filename,
+                            "chunks_created": len(chunks),
+                            "document_id": doc_id
+                        }
+                    else:
+                        error_msg = result.get("error", "Unknown error")
+                        if "session" in error_msg.lower() and attempt < max_retries - 1:
+                            logger.warning(f"Session error, refreshing embeddings client (attempt {attempt + 1}/{max_retries})")
+                            await self.retriever.refresh_embeddings()
+                            await asyncio.sleep(1)
+                            continue
+                        raise Exception(error_msg)
+                        
+                except Exception as e:
+                    if "session" in str(e).lower() and attempt < max_retries - 1:
+                        logger.warning(f"Session error, refreshing embeddings client (attempt {attempt + 1}/{max_retries})")
+                        await self.retriever.refresh_embeddings()
+                        await asyncio.sleep(1)  # Brief delay before retry
+                        continue
+                    raise
             
-            if result["success"]:
-                logger.info(
-                    "Document ingested successfully",
-                    filename=filename,
-                    chunks=len(chunks)
-                )
-                
-                return {
-                    "success": True,
-                    "filename": filename,
-                    "chunks_created": len(chunks),
-                    "document_id": doc_id
-                }
-            else:
-                raise Exception(result.get("error", "Unknown error"))
+            raise Exception("Failed to add documents after retries")
             
         except Exception as e:
             logger.error("Document ingestion failed", filename=filename, error=str(e), exc_info=True)
@@ -151,27 +179,56 @@ class DocumentIngestion:
     async def _load_default_documents(self) -> None:
         """Load default documents from data directory."""
         try:
-            data_dir = Path("data/documents")
+            # Try multiple possible data directory locations
+            possible_dirs = [
+                Path("src/data"),           # Development environment
+                Path("/app/src/data"),      # Docker environment
+                Path("data/documents"),     # Alternative location
+                Path("data")                # Fallback
+            ]
             
-            if not data_dir.exists():
-                logger.warning("Data directory not found, skipping default documents")
+            data_dir = None
+            for dir_path in possible_dirs:
+                if dir_path.exists():
+                    data_dir = dir_path
+                    logger.info(f"Found data directory at: {dir_path}")
+                    break
+            
+            if not data_dir:
+                logger.warning("Data directory not found in any expected location, skipping default documents")
                 return
             
+            # Load .txt files from the data directory
+            loaded_count = 0
             for file_path in data_dir.glob("*.txt"):
                 try:
                     with open(file_path, "rb") as f:
                         content = f.read()
                     
+                    # Determine document type from filename
+                    filename = file_path.name.lower()
+                    if "faq" in filename:
+                        doc_type = "faq"
+                    elif "polic" in filename:
+                        doc_type = "policy"
+                    elif "product" in filename:
+                        doc_type = "product_info"
+                    else:
+                        doc_type = "general"
+                    
                     await self.ingest_document(
                         content=content,
                         filename=file_path.name,
-                        document_type="default"
+                        document_type=doc_type
                     )
+                    
+                    loaded_count += 1
+                    logger.info(f"Loaded default document: {file_path.name} as type: {doc_type}")
                     
                 except Exception as e:
                     logger.error("Failed to load default document", file=file_path.name, error=str(e))
             
-            logger.info("Default documents loaded")
+            logger.info(f"Default documents loaded successfully (count: {loaded_count})")
             
         except Exception as e:
             logger.error("Failed to load default documents", error=str(e))

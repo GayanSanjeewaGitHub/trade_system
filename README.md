@@ -355,3 +355,4 @@ uv add "packageA" "packageB"
 
  
 docker build -f docker/Dockerfile -t trading-chatbot .
+.\START.bat

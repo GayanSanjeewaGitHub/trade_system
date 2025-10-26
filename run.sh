@@ -49,43 +49,12 @@ uv pip install -r requirements.txt
 echo -e "${GREEN}✓ Dependencies installed${NC}"
 
 # Create necessary directories
-mkdir -p data/documents data/ground_truth logs/evaluations tmp/uploads
+mkdir -p logs/evaluations tmp/uploads
 
 echo -e "${GREEN}✓ Directories created${NC}"
 
-# Check if data files exist
-if [ ! -f data/documents/faq.txt ]; then
-    echo -e "${YELLOW}Creating sample data files...${NC}"
-    
-    cat > data/documents/faq.txt << 'EOF'
-Frequently Asked Questions - Trading Platform
-
-Q: What are the trading fees?
-A: Our platform charges a competitive fee of 0.1% per transaction for stock trades. There are no monthly account maintenance fees.
-
-Q: What is the minimum deposit?
-A: The minimum initial deposit is $100. However, we recommend starting with at least $500 for diversified trading.
-
-Q: How long does withdrawal take?
-A: Standard withdrawals are processed within 1-3 business days. Expedited withdrawals are available for a $25 fee.
-EOF
-
-    cat > data/documents/policies.txt << 'EOF'
-Trading Platform Policies
-
-ACCOUNT POLICIES
-1. Account Opening - Must be 18 years or older
-2. Account Security - Two-factor authentication recommended
-3. Trading Policies - Pattern day trader rule applies
-
-FEES AND CHARGES
-Stock Trades: 0.1% per transaction
-Options Trades: $0.65 per contract
-Wire Transfers: $25 outgoing
-EOF
-
-    echo -e "${GREEN}✓ Sample data files created${NC}"
-fi
+# Note: Data files are now stored in src/data/ directory
+# The application will automatically load them from there
 
 # Run tests (optional)
 if [ "$1" == "--test" ]; then

@@ -14,7 +14,8 @@ services:
       - ../logs:/app/logs
       - ../data:/app/data
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - chatbot-network
@@ -30,6 +31,11 @@ services:
     restart: unless-stopped
     networks:
       - chatbot-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
  
   langfuse:
@@ -44,7 +50,8 @@ services:
       - SALT=R3PbZBy+v=
       - TELEMETRY_ENABLED=false
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - chatbot-network
@@ -61,6 +68,11 @@ services:
     restart: unless-stopped
     networks:
       - chatbot-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   redis-data:

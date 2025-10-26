@@ -25,7 +25,8 @@ RUN uv sync
 
 # Copy application code
 COPY src/ ./src/
-COPY data/ ./data/
+
+# Note: Data files are now in src/data/ (copied above with src/)
 
 # Create necessary directories
 RUN mkdir -p /tmp/uploads logs
