@@ -72,7 +72,7 @@ class ControllerAgent:
             logger.info("Initializing controller agent")
             
             # Initialize LLM
-            if settings.openai_api_key and settings.openai_api_key != "your-openai-api-key":
+            if settings.openai_api_key and settings.openai_api_key.strip() != "your-openai-api-key":
                 self.llm = ChatOpenAI(
                     model=settings.llm_model,
                     temperature=settings.llm_temperature,
@@ -251,12 +251,22 @@ class ControllerAgent:
             user_input = state["user_input"]
             
             if not self.llm:
-                # Simple keyword-based classification if no LLM available
+                # Keyword-based classification using configurable keywords from settings
                 user_input_lower = user_input.lower()
-                if any(keyword in user_input_lower for keyword in ["buy", "sell", "trade", "stock", "price", "invest", "portfolio"]):
+                
+                # Get keyword lists from settings
+                advisor_keywords = settings.get_advisor_keywords_list()
+                faq_keywords = settings.get_faq_keywords_list()
+                
+                # Check for advisor keywords first
+                if any(keyword in user_input_lower for keyword in advisor_keywords):
                     intent = "ADVISOR"
-                else:
+                # Check for FAQ keywords, or default to FAQ
+                elif any(keyword in user_input_lower for keyword in faq_keywords) or True:
                     intent = "FAQ"
+                else:
+                    intent = "FAQ"  # Default fallback
+                    
                 logger.info("Intent classified using keywords", intent=intent)
             else:
                 classification_prompt = f"""Analyze the following user message and classify it into one of these categories:

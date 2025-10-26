@@ -65,13 +65,17 @@ class Settings(BaseSettings):
     max_trade_amount: float = 100000.0
     min_trade_amount: float = 1.0
     max_message_length: int = 5000
-    restricted_topics: List[str] = ["illegal", "violence", "hate", "manipulation"]
+    restricted_topics: List[str] = ["illegal", "violence", "hate", "manipulation" , "self-harm" ,"drugs" ,"gambling" ,"adult content"]
     profanity_threshold: float = 0.8
 
     # Agent Configuration
     max_agent_iterations: int = 10
     agent_timeout: int = 120
     max_tool_retries: int = 3
+    
+    # Intent Classification Keywords
+    advisor_keywords: str = "buy,sell,trade,stock,price,invest,portfolio,shares,market,dividend,broker"
+    faq_keywords: str = "account,cds,fee,charge,policy,regulation,sec,cse,hours,contact,support,ipo,listing,open account,how to,what is,transfer,withdraw,deposit,statement"
 
     # MCP Configuration
     mcp_server_url: str = "http://localhost:8001"
@@ -147,6 +151,15 @@ class Settings(BaseSettings):
     def is_development(self) -> bool:
         """Check if running in development environment."""
         return self.environment.lower() in ["development", "dev"]
+
+
+    def get_advisor_keywords_list(self) -> List[str]:
+        """Get advisor keywords as a list."""
+        return [k.strip().lower() for k in self.advisor_keywords.split(",") if k.strip()]
+    
+    def get_faq_keywords_list(self) -> List[str]:
+        """Get FAQ keywords as a list."""
+        return [k.strip().lower() for k in self.faq_keywords.split(",") if k.strip()]
 
 
 @lru_cache()
