@@ -1,0 +1,89 @@
+{
+  "summary": {
+    "total_tests": 5,
+    "passed": 3,
+    "failed": 2,
+    "pass_rate": 60.0,
+    "avg_similarity": 0.7998,
+    "avg_latency_ms": 10822.69,
+    "category_breakdown": {
+      "faq": {
+        "total": 4,
+        "passed": 3,
+        "pass_rate": 75.0
+      },
+      "organization": {
+        "total": 1,
+        "passed": 0,
+        "pass_rate": 0.0
+      }
+    }
+  },
+  "results": [
+    {
+      "question": "What is the Colombo Stock Exchange?",
+      "category": "faq",
+      "expected_answer": "The Colombo Stock Exchange is the primary stock exchange in Sri Lanka, established in 1985. It provides a regulated marketplace for trading shares of listed companies and operates two main indices: the All Share Price Index (ASPI) and the S&P SL20 Index.",
+      "actual_answer": "The Colombo Stock Exchange (CSE) is the primary stock exchange in Sri Lanka, established in 1985. It provides a regulated marketplace for trading shares of listed companies and operates two main indices: the All Share Price Index (ASPI) and the S&P SL20 Index.",
+      "similarity_score": 0.9591,
+      "passed": true,
+      "latency_ms": 10729.59,
+      "agent_path": [
+        "controller",
+        "faq"
+      ]
+    },
+    {
+      "question": "What is the vision of CSE?",
+      "category": "organization",
+      "expected_answer": "The vision of CSE is to create sustainable wealth and value for all stakeholders in the Sri Lankan capital market.",
+      "actual_answer": "The provided context does not contain information about the vision of the CSE.",
+      "similarity_score": 0.5498,
+      "passed": false,
+      "latency_ms": 10008.72,
+      "agent_path": [
+        "controller",
+        "faq"
+      ]
+    },
+    {
+      "question": "What are the CSE trading hours?",
+      "category": "faq",
+      "expected_answer": "The CSE operates from Monday to Friday (except public holidays). Trading sessions are typically from 9:30 AM to 2:30 PM Sri Lanka Time. Pre-opening and post-closing sessions may also be available for order placement.",
+      "actual_answer": "The CSE trading hours are from Monday to Friday (except public holidays), typically from 9:30 AM to 2:30 PM Sri Lanka Time. Pre-opening and post-closing sessions may also be available for order placement.",
+      "similarity_score": 0.9812,
+      "passed": true,
+      "latency_ms": 9745.73,
+      "agent_path": [
+        "controller",
+        "faq"
+      ]
+    },
+    {
+      "question": "What are the trading fees on CSE?",
+      "category": "faq",
+      "expected_answer": "Trading on the CSE involves several charges: Brokerage Commission (typically 0.5% to 1.5% of transaction value, negotiable with your broker), SEC Levy (0.05% of transaction value), CDS Fee (minimal fee for account maintenance and transfers), and Stamp Duty as per government regulations.",
+      "actual_answer": "Trading on the CSE involves several charges including:\n- Brokerage Commission: Typically ranges from 0.5% to 1.5% of the transaction value, which is negotiable with your broker.\n- SEC Levy: 0.05% of the transaction value.\n- CDS Fee: A minimal fee for account maintenance and transfers.\n- Stamp Duty: Charged as per government regulations.\n\nPlease check with your specific broker for the exact fee structures.",
+      "similarity_score": 0.9786,
+      "passed": true,
+      "latency_ms": 8137.59,
+      "agent_path": [
+        "controller",
+        "faq"
+      ]
+    },
+    {
+      "question": "What is the first step to invest in CSE?",
+      "category": "faq",
+      "expected_answer": "To trade in listed securities, it is mandatory for investors to open a CDS account through an authorized Stock Broker Firm. A CDS account acts as a means of representing ownership and movement of securities listed on the CSE.",
+      "actual_answer": "Investing in the Colombo Stock Exchange (CSE) or any stock exchange involves a series of steps to start with. The very first step for investing in the CSE, or any stock market for that matter, typically involves:\n\n1. **Education and Research:**\n   - **Learn About Investing:** Before investing, it's crucial to understand the basics of the stock market, different types of investments (stocks, bonds, ETFs, mutual funds), and the risks associated with investing.\n   - **Research the CSE:** Understand the specific characteristics of the CSE, including the market sectors it covers, the types of companies listed, and any unique regulations or trading practices specific to Sri Lanka.\n\n2. **Financial Assessment:**\n   - Assess your financial situation to determine how much you can afford to invest without affecting your essential expenses. It's important to invest money that you won't need in the short term to cover emergencies or regular expenses.\n\n3. **Set Investment Goals:**\n   - Define what you aim to achieve through your investments. This could be saving for retirement, a down payment on a house, or building wealth over time. Your goals will influence your investment strategy, including the level of risk you're willing to take and the types of assets you choose to invest in.\n\n4. **Open a Brokerage Account:**\n   - To buy and sell stocks on the CSE, you'll need to open a brokerage account with a firm that is licensed to operate on the CSE. This involves selecting a broker, completing the necessary application forms, and providing required documentation. Compare brokers based on their fees, services, trading platforms, and customer support.\n\n5. **Deposit Funds:**\n   - Once your brokerage account is set up, you’ll need to deposit funds that you can use to make investments.\n\n6. **Start Investing:**\n   - With your account funded, you can start investing in stocks on the CSE. Begin with companies or sectors you're familiar with, and consider starting small as you learn more about the market.\n\nThroughout this process, it's helpful to keep learning and stay informed about market trends and individual companies. Remember, investing involves risks, including the loss of principal, so it's important to approach it with a strategy and a clear understanding of those risks.",
+      "similarity_score": 0.5302,
+      "passed": false,
+      "latency_ms": 15491.8,
+      "agent_path": [
+        "controller",
+        "advisor"
+      ]
+    }
+  ]
+}

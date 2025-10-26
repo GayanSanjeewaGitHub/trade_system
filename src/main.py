@@ -381,6 +381,166 @@ async def get_metrics(request: Request, session_id: Optional[str] = None):
         )
 
 
+@app.get("/evaluate/groundtruth", tags=["Monitoring"])
+@limiter.limit("5/minute")
+async def evaluate_groundtruth(request: Request, limit: Optional[int] = None):
+    """
+    Evaluate chatbot against ground truth Q&A pairs.
+    
+    Args:
+        request: FastAPI Request object for rate limiting
+        limit: Optional limit on number of test cases (for quick testing)
+        
+    Returns:
+        Evaluation results with metrics and detailed test results
+    """
+    import json
+    from pathlib import Path
+    
+    if not controller_agent:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Service not ready"
+        )
+    
+    logger.info("Starting ground truth evaluation", limit=limit)
+    
+    try:
+        # Load ground truth data
+        ground_truth_path = Path("src/data/ground_truth.py/test_qa_pairs.json")
+        
+        if not ground_truth_path.exists():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Ground truth data file not found"
+            )
+        
+        with open(ground_truth_path, 'r', encoding='utf-8') as f:
+            ground_truth = json.load(f)
+        
+        # Apply limit if specified
+        test_cases = ground_truth[:limit] if limit else ground_truth
+        
+        logger.info(f"Loaded {len(test_cases)} test cases from ground truth")
+        
+        # Run evaluation
+        results = []
+        passed_count = 0
+        total_latency = 0.0
+        
+        from langchain_openai import OpenAIEmbeddings
+        import numpy as np
+        
+        embeddings = OpenAIEmbeddings(
+            model=settings.embedding_model,
+            api_key=settings.openai_api_key
+        )
+        
+        for i, test_case in enumerate(test_cases, 1):
+            try:
+                # Get response from agent
+                response = await controller_agent.process_message(
+                    message=test_case['question'],
+                    session_id=f"eval_{i}",
+                    user_id="evaluator",
+                    context={}
+                )
+                
+                actual_answer = response.get("response", "")
+                expected_answer = test_case['expected_answer']
+                latency = response.get("metadata", {}).get("latency_ms", 0)
+                total_latency += latency
+                
+                # Calculate semantic similarity
+                try:
+                    expected_emb = await embeddings.aembed_query(expected_answer)
+                    actual_emb = await embeddings.aembed_query(actual_answer)
+                    
+                    similarity = float(np.dot(expected_emb, actual_emb) / (
+                        np.linalg.norm(expected_emb) * np.linalg.norm(actual_emb)
+                    ))
+                except:
+                    similarity = 0.0
+                
+                passed = similarity >= 0.7
+                if passed:
+                    passed_count += 1
+                
+                results.append({
+                    "question": test_case['question'],
+                    "category": test_case.get('category', 'general'),
+                    "expected_answer": expected_answer,
+                    "actual_answer": actual_answer,
+                    "similarity_score": round(similarity, 4),
+                    "passed": passed,
+                    "latency_ms": round(latency, 2),
+                    "agent_path": response.get("agent_path", [])
+                })
+                
+                logger.info(f"Evaluated {i}/{len(test_cases)}", passed=passed, score=similarity)
+                
+            except Exception as e:
+                logger.error(f"Failed to evaluate test case {i}", error=str(e))
+                results.append({
+                    "question": test_case['question'],
+                    "category": test_case.get('category', 'general'),
+                    "expected_answer": test_case['expected_answer'],
+                    "actual_answer": f"ERROR: {str(e)}",
+                    "similarity_score": 0.0,
+                    "passed": False,
+                    "latency_ms": 0.0,
+                    "agent_path": [],
+                    "error": str(e)
+                })
+        
+        # Calculate summary metrics
+        total = len(results)
+        pass_rate = (passed_count / total * 100) if total > 0 else 0.0
+        avg_similarity = sum(r['similarity_score'] for r in results) / total if total > 0 else 0.0
+        avg_latency = total_latency / total if total > 0 else 0.0
+        
+        # Category breakdown
+        categories = {}
+        for result in results:
+            cat = result['category']
+            if cat not in categories:
+                categories[cat] = {'total': 0, 'passed': 0}
+            categories[cat]['total'] += 1
+            if result['passed']:
+                categories[cat]['passed'] += 1
+        
+        for cat in categories:
+            categories[cat]['pass_rate'] = round(
+                (categories[cat]['passed'] / categories[cat]['total']) * 100, 2
+            )
+        
+        summary = {
+            "total_tests": total,
+            "passed": passed_count,
+            "failed": total - passed_count,
+            "pass_rate": round(pass_rate, 2),
+            "avg_similarity": round(avg_similarity, 4),
+            "avg_latency_ms": round(avg_latency, 2),
+            "category_breakdown": categories
+        }
+        
+        logger.info("Ground truth evaluation complete", summary=summary)
+        
+        return {
+            "summary": summary,
+            "results": results
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("Ground truth evaluation failed", error=str(e), exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Evaluation failed: {str(e)}"
+        )
+
+
 @app.get("/", tags=["System"])
 async def root():
     """Root endpoint with API information."""

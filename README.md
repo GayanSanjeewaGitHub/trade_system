@@ -356,3 +356,6 @@ uv add "packageA" "packageB"
  
 docker build -f docker/Dockerfile -t trading-chatbot .
 .\START.bat
+
+
+python src/monitoring/quick_eval.py
