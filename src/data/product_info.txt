@@ -1,9 +1,294 @@
-Trading Platform Products and Services
+COLOMBO STOCK EXCHANGE - ABOUT THE ORGANIZATIONTrading Platform Products and Services
 
-ACCOUNT TYPES
 
-1. Individual Brokerage Account
+
+========================================ACCOUNT TYPES
+
+SECTION 1: VISION, MISSION & VALUES
+
+========================================1. Individual Brokerage Account
+
 - Standard taxable investment account
-- No contribution limits
-- Full trading access
+
+ORGANIZATIONAL VISION:- No contribution limits
+
+To create sustainable wealth and value for all stakeholders in the Sri Lankan capital market.- Full trading access
+
 -
+ORGANIZATIONAL MISSION:
+The Colombo Stock Exchange is committed to:
+1. Increase the number of issuers to raise capital through CSE
+2. Increase the number of active investors participating in the market
+3. Provide facilities to trade diversified products and instruments
+4. Promote sustainability among listed companies
+5. Ensure balanced regulation to maintain market integrity and investor confidence
+
+CORE COMMITMENT:
+The CSE serves as the cornerstone of Sri Lanka's capital market, facilitating efficient capital formation and providing investors with opportunities to participate in the nation's economic growth while maintaining the highest standards of transparency and governance.
+
+========================================
+SECTION 2: ORGANIZATIONAL STRUCTURE
+========================================
+
+GOVERNING BODY:
+The Colombo Stock Exchange is governed by a Board of Directors comprising:
+
+CHAIRMAN:
+- Mr. Dimuthu Abeyesekera - Chairman of the Board
+
+ELECTED NON-EXECUTIVE DIRECTORS:
+- Mr. Ray Abeywardena - Elected Non-Executive Director
+- Mr. Kosala Gamage - Elected Non-Executive Director
+- Mr. Sujeewa Peiris - Elected Non-Executive Director
+
+APPOINTED NON-EXECUTIVE DIRECTORS:
+- Mr. Arjuna Herath - Appointed Non-Executive Director
+- Mr. Jayantha Fernando - Appointed Non-Executive Director
+- Mr. Suren De Silva - Appointed Non-Executive Director
+
+SENIOR MANAGEMENT TEAM:
+The CSE is led by a team of experienced professionals providing strategic leadership:
+
+EXECUTIVE LEADERSHIP:
+- Mr. Rajeeva Bandaranaike - Chief Executive Officer
+- Ms. Vindhya Jayasekera - Chief Executive Officer - Designate
+- Mr. Chandrakanth Jayasinghe - Chief Market Operations Officer
+- Ms. Nilupa Perera - Chief Regulatory Officer
+
+SENIOR VICE PRESIDENTS:
+- Mr. Kusal Nissanka - Senior Vice President, Finance and Administration
+- Mr. Niroshan Wijesundere - Senior Vice President, Marketing
+- Mr. Nishantha Hewavithana - Senior Vice President, Research and Strategy
+- Mr. Kaushal Siriwardena - Senior Vice President, Head of Information Technology
+- Mr. Janaka Mahagedarawatta - Senior Vice President, Digital Transformation & IT Infrastructure Support
+- Ms. Punyamali Saparamadu - Senior Vice President, Commercial
+- Ms. Dulani Warnakulasooriya - Senior Vice President, Head of CSE Clear
+- Ms. Shivandini Liyanage - Senior Vice President, Legal, Enforcement and Compliance
+
+VICE PRESIDENTS:
+- Ms. Kushlani Coswatte - Vice President, Internal Audit
+- Ms. Kanishka Munasinghe - Vice President, Listing
+- Ms. Anoja Senanayake - Vice President (Department not specified)
+
+========================================
+SECTION 3: HISTORICAL MILESTONES
+========================================
+
+FOUNDATIONAL PERIOD (1896-1985):
+1896 - Inception of share trading in Sri Lanka under the Colombo Share Brokers Association (CSBA)
+1904 - Name changed from Colombo Share Brokers Association to Colombo Brokers Association (CBA)
+1984 - Establishment of a Public Trading Floor and inauguration of trading on the "open outcry system" by the Colombo Brokers Association
+1985 - Commencement of a second trading floor by the Stock Brokers Association; Amalgamation of the Colombo Brokers Association and the Stock Brokers Association trading floors to constitute the Colombo Securities Exchange (GTE) Ltd
+
+REGULATORY FRAMEWORK ESTABLISHMENT (1986-1990):
+1986 - The Colombo Securities Exchange (GTE) Ltd becomes a corresponding member of The International Federation of Stock exchanges (FIBV)
+1987 - Enactment of the Securities Council Act No. 36 of 1987 (now amended as the Securities and Exchange Commission Act) providing for the establishment of a regulator for the capital market
+1988 - The Stock Exchange adopts new Rules for Listed Companies replacing the by-laws of the Colombo Brokers Association
+1989 - Introduction of new Trading Floor Rules and New Conditions of Sale
+1990 - Name changed from the Colombo Securities Exchange (GTE) Ltd to the Colombo Stock Exchange; Liberalization of investment in the stock market with the abolition of the 100% transfer of Property Tax on share purchases by non-nationals and the relaxation of Exchange Control on inward remittances for share purchases and outward remittances of surpluses on dealings in listed shares
+
+MODERNIZATION ERA (1991-2000):
+1991 - Automation of the Clearing House of the Stock Exchange with the establishment of the Central Depository System (CDS)
+1992 - Abolition of Capital Gains Tax on shares
+1993 - Introduction of Compliance Officers in Member Firms
+1994 - Upgrade of the Central Depository System; The Stock Exchange shifts office to new premises at the World Trade Center; The Company Takeovers and Mergers Code gazetted
+1996 - Marks 100 years of share trading in Sri Lanka; Introduction of an Over the Counter Market for unlisted shares; The introduction of a two-tiered board, The Main Board and the Second Board; The Colombo Stock Exchange is appointed as the National Numbering Agency by the Association of National Numbering Agencies (ANNA)
+1997 - Automation of trading with the installation of a state of the art Screen Based Trading System (ATS); The establishment of a Settlement Guarantee Fund and a Compensation Fund
+1998 - The CSE is admitted as the 52nd member of the World Federation of Exchanges (WFE)
+1999 - Introduction of the Milanka Price Index (MPI)
+2000 - Formation of the South Asian Federation of Exchanges (SAFE)
+
+EXPANSION AND INNOVATION (2001-2010):
+2001 - Introduction of Stock Borrowing and Lending; Re-Opening of the Public Gallery at the CSE premises
+2003 - The CSE opens a Regional Branch in Kandy
+2004 - Introduction of a new index on Total Returns (TRI); Launch of a new system for the trading of Debt Securities (DEX)
+2005 - The CSE opens Regional Branch in Kurunegala
+2006 - Five new trading members admitted to the CSE to trade both equity and debt securities listed on the Exchange
+2007 - The CSE opens Regional Branch in Negombo; Introduction of a single tier settlement of T+3; Launch of a new www.cse.lk
+2008 - Automated market surveillance system introduced to the CSE
+2009 - Re-opening of the Public Gallery at the CSE premises; Launch of new CDS website: www.cds.lk
+2010 - CSE opens Regional Branch in Jaffna; Six new trading members admitted to CSE for trading in both equity and debt; One trading member admitted to CSE for trading in debt securities only
+
+DIGITAL TRANSFORMATION (2011-2016):
+2012 - The Automated Trading System (ATS) was upgraded from ATS 4.00 to ATS 7.10 for Equity trading; The www.cse.lk was launched in trilingual with upgraded features; The CSE launched the S&P Sri Lanka 20 Index
+2013 - Launch of version 7.14 upgrade of the Automated Trading System (ATS), facilitating a uniform trading platform for trading of fixed income instruments; CSE opens Regional Branch Offices in Anuradhapura, Hambantota and Ratnapura; A partnership agreement was signed between the CSE and Copal Amba, a subsidiary of Moody's Corporation, for equity research; Obtaining Certifications for ISO 27001 (Information Security Management System), ISO 22301 (Business Continuity Management System) and ISO 20000 (Information Technology Service Management), the CSE became the first global exchange to achieve all three of these certifications; Launch of the Android Mobile Application offering live stock market information among many other interactive features
+2014 - Launch of the official CSE Twitter handle @CSE_Media; Launch of the new CDS system and upgrade of Automated Trading System (ATS); The CSE won the award for "Most Sustainable Growth Exchange" in Asia awarded by Capital Finance International (CFI)
+2015 - Inauguration of Market Opening Ceremonies with Listed Companies; Launch of official CSE Facebook and LinkedIn Pages; CSE took over the Chairmanship of South Asian Federation of Exchanges (SAFE); CSE signed a Memorandum of Understanding (MOU) with Maldivian Stock Exchange (MSE) for co-operation and mutual development; CSE joined United Nations Sustainable Stock Exchanges (SSE) Initiative; CSE celebrated 30th Anniversary with a special Market Opening Ceremony; CSE adopts Global Industry Classification Standard (GICS) for classification of Listed Companies; CSE was awarded for the Most Innovative Use of Training and Development as an HR Initiative for Organizational Development at the 3rd Global Training and Development Leadership Awards
+2016 - The CSE conducted an Investor Forum and Issuer Forum in the Maldives; The CSE implemented a new Broker Back Office and Order Management Systems for Stock broker Firms as part of upgrading Member firm Infrastructure funded jointly by the CSE and SEC; Launch of official CSE YouTube Channel; The CSE launched an Educational Portal targeted at prospective investors and students to be used as an educational tool; The CSE won Global HR Excellence Award for Innovation in Training and Development; The S&P/CSE Sector and Industry Group Indices jointly launched by S&P Dow Jones Indices and CSE; The CSE won IPM's National HR Excellence Gold Award for Best HR Practices; The CDS launched e-Connect facility; The CDS signed MOU with Central Depository Company Pakistan Ltd; The CDS celebrated 25 years in the Sri Lankan capital market; The CSE opened new regional branch office in Ambalantota
+
+========================================
+SECTION 4: INTERNATIONAL AFFILIATIONS
+========================================
+
+WORLD FEDERATION OF EXCHANGES (WFE):
+Status: Full Member since 1998
+Significance: The CSE was the first South Asian member to be admitted to the WFE
+About WFE: 
+- Formerly known as FIBV (International Federation of Stock Exchanges)
+- Trade association of 52 publicly regulated stock, futures and options exchanges
+- Membership criteria used by some governments and national associations of asset managers for preferential investment policy and taxation
+- Total market capitalization of member exchanges: approximately US $46.5 trillion (as of end 2009)
+- Additional participants: 6 Associates, 14 WFE Affiliates, 27 WFE Correspondents
+Role: Members establish formal environments for trading, clearing and settlement of securities and investment products
+Recognition: CSE's admission in 1998 recognized its technology, systems and regulations, making it the first South Asian exchange to achieve this status
+
+SOUTH ASIAN FEDERATION OF EXCHANGES (SAFE):
+Status: Founding Member since January 2000
+Membership: 16 Exchanges from India, Pakistan, Bangladesh, Sri Lanka, Nepal, Maldives, Mauritius and Bhutan
+CSE Leadership: CSE took over the Chairmanship of SAFE in 2015
+Primary Objectives:
+- Encourage cooperation among members to promote development of respective securities markets
+- Develop an integrated stock trading system in the region
+- Offer listing and trading opportunities for securities issued in the region
+- Work towards common standards including international accounting standards
+- Promote best business practices in capital markets
+- Represent members in related international forums
+- Encourage cross-border listing
+- Cooperate in human resource development
+- Facilitate technology transfer among members
+- Address other issues of common interest
+Significance: SAFE marks an important milestone in the march of South Asian capital markets towards regional and global integration
+
+SUSTAINABLE STOCK EXCHANGES (SSE) INITIATIVE:
+Status: Member since September 24, 2015
+Co-Convenors:
+- UN-supported Principles for Responsible Investment
+- United Nations Conference on Trade and Development
+- United Nations Environment Programme Finance Initiative
+- United Nations Global Compact
+Purpose: Peer-to-peer learning platform for exploring how exchanges can work together with investors, regulators, and companies to enhance corporate transparency and performance on ESG (Environmental, Social and Corporate Governance) issues
+Launch: Initiated by UN Secretary General Ban Ki-moon in 2009
+Objectives:
+- Explore how exchanges can work together with investors, regulators and companies to promote sustainability initiatives
+- Enhance corporate transparency on Environmental, Social, and Corporate Governance (ESG) issues
+- Encourage responsible long-term approaches to investment
+Website: http://www.sseinitiative.org
+Impact: Over the years, the SSE Initiative has contributed to enhanced corporate transparency and encouraged responsible investment practices globally
+
+========================================
+SECTION 5: CONTACT INFORMATION
+========================================
+
+HEAD OFFICE:
+Colombo Stock Exchange
+04-01, West Block
+World Trade Center, Echelon Square
+Colombo 01, Sri Lanka
+
+CONTACT DETAILS:
+Phone: +94 11 2356456
+Fax: +94 11 2445279
+Email: info@cse.lk
+Website: www.cse.lk
+
+REGIONAL BRANCH OFFICES:
+The CSE maintains regional presence in the following locations:
+- Kandy (Opened 2003)
+- Kurunegala (Opened 2005)
+- Negombo (Opened 2007)
+- Jaffna (Opened 2010)
+- Anuradhapura (Opened 2013)
+- Hambantota (Opened 2013)
+- Ratnapura (Opened 2013)
+- Ambalantota (Opened 2016)
+- Matara
+
+DIGITAL PRESENCE:
+- Website: www.cse.lk (trilingual: English, Sinhala, Tamil)
+- CDS Website: www.cds.lk
+- Mobile App: Available on Apple App Store and Google Play Store
+- Twitter: @CSE_Media
+- Facebook: CSE Media
+- LinkedIn: Colombo Stock Exchange
+- YouTube: CSE Official Channel
+- Instagram: @csemedia
+
+========================================
+SECTION 6: CERTIFICATIONS & AWARDS
+========================================
+
+ISO CERTIFICATIONS (2013):
+The CSE became the first global exchange to achieve all three of these certifications:
+- ISO 27001: Information Security Management System
+- ISO 22301: Business Continuity Management System
+- ISO 20000: Information Technology Service Management
+
+AWARDS & RECOGNITION:
+2014 - "Most Sustainable Growth Exchange" in Asia - Capital Finance International (CFI)
+2015 - "Most Innovative Use of Training and Development as an HR Initiative for Organizational Development" - 3rd Global Training and Development Leadership Awards
+2016 - Global HR Excellence Award for Innovation in Training and Development
+2016 - IPM's National HR Excellence Gold Award for Best HR Practices
+
+========================================
+SECTION 7: KEY INFRASTRUCTURE & SYSTEMS
+========================================
+
+TRADING SYSTEMS:
+- Automated Trading System (ATS): Upgraded to version 7.14 (2013) for uniform trading platform
+- Screen Based Trading System: Implemented 1997, replacing open outcry system
+- Debt Securities Trading (DEX): Launched 2004
+- Settlement Cycle: T+3 (Three-day settlement)
+- Market Surveillance: Automated market surveillance system (2008)
+
+CENTRAL DEPOSITORY SYSTEMS (CDS):
+- Established: 1991
+- Status: Wholly owned subsidiary of CSE
+- Function: Acts as depository for securities traded on CSE and facilitates settlement
+- Services: e-Connect facility for online account access (launched 2016)
+- Anniversary: Celebrated 25 years in 2016
+
+INDICES:
+- All Share Price Index (ASPI): Main market index
+- S&P Sri Lanka 20 Index: Launched 2012
+- Milanka Price Index (MPI): Introduced 1999
+- Total Returns Index (TRI): Introduced 2004
+- S&P/CSE Sector and Industry Group Indices: Jointly launched with S&P Dow Jones Indices (2016)
+
+MARKET STRUCTURE:
+- Main Board: For established companies
+- Second Board: For emerging companies (introduced 1996)
+- Over the Counter Market: For unlisted shares (introduced 1996)
+- Classification System: Global Industry Classification Standard (GICS) adopted 2015
+
+MEMBER INFRASTRUCTURE:
+- 29 Licensed Stock Broking Firms (including one Debt Trading Member)
+- Broker Back Office and Order Management Systems: Upgraded 2016 (funded jointly by CSE and SEC)
+- Settlement Guarantee Fund: Established 1997
+- Compensation Fund: Established 1997
+
+========================================
+SECTION 8: STRATEGIC INITIATIVES
+========================================
+
+INVESTOR EDUCATION:
+- Educational Portal: Launched 2016 for prospective investors and students
+- Public Gallery: Available at CSE premises for public observation
+- Investor Forums: Conducted domestically and internationally (including Maldives 2016)
+- Regional Access: 8+ branch offices across Sri Lanka for investor accessibility
+
+SUSTAINABILITY INITIATIVES:
+- Member of UN Sustainable Stock Exchanges (SSE) Initiative since 2015
+- Promotes sustainability among listed companies as part of core mission
+- Focus on Environmental, Social, and Corporate Governance (ESG) standards
+
+MARKET DEVELOPMENT:
+- Issuer Forums: Regular engagement with potential and existing listed companies
+- Research Partnership: Partnership with Copal Amba (Moody's subsidiary) for equity research
+- Product Diversification: Facilities to trade equity, debt securities, and other instruments
+- Cross-border Collaboration: MOU with Maldivian Stock Exchange (2015) and Central Depository Company Pakistan Ltd (2016)
+
+REGULATORY FRAMEWORK:
+- Compliance Officers: Mandatory in all member firms since 1993
+- Takeovers and Mergers Code: Gazetted 1994
+- Stock Borrowing and Lending: Introduced 2001
+- Balanced Regulation: Maintains market integrity while facilitating growth
+
+TECHNOLOGICAL ADVANCEMENT:
+- Continuous system upgrades to maintain international standards
+- Mobile applications for investor access
+- Disaster Recovery capabilities
+- Information Security Management systems
+
+========================================
+END OF CSE ORGANIZATIONAL INFORMATION
+========================================

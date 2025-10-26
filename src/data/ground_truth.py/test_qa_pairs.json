@@ -1,52 +1,157 @@
 [
   {
-    "question": "What are the trading fees?",
-    "expected_answer": "The platform charges 0.1% per transaction for stock trades with no monthly maintenance fees.",
+    "question": "What is the Colombo Stock Exchange?",
+    "expected_answer": "The Colombo Stock Exchange is the primary stock exchange in Sri Lanka, established in 1985. It provides a regulated marketplace for trading shares of listed companies and operates two main indices: the All Share Price Index (ASPI) and the S&P SL20 Index.",
     "category": "faq"
   },
   {
-    "question": "What is the minimum deposit?",
-    "expected_answer": "The minimum initial deposit is $100, though $500 is recommended for diversified trading.",
+    "question": "What is the vision of CSE?",
+    "expected_answer": "The vision of CSE is to create sustainable wealth and value for all stakeholders in the Sri Lankan capital market.",
+    "category": "organization"
+  },
+  {
+    "question": "What are the CSE trading hours?",
+    "expected_answer": "The CSE operates from Monday to Friday (except public holidays). Trading sessions are typically from 9:30 AM to 2:30 PM Sri Lanka Time. Pre-opening and post-closing sessions may also be available for order placement.",
     "category": "faq"
   },
   {
-    "question": "How long does withdrawal take?",
-    "expected_answer": "Standard withdrawals take 1-3 business days. Expedited withdrawals are processed within 24 hours for a $25 fee.",
+    "question": "What are the trading fees on CSE?",
+    "expected_answer": "Trading on the CSE involves several charges: Brokerage Commission (typically 0.5% to 1.5% of transaction value, negotiable with your broker), SEC Levy (0.05% of transaction value), CDS Fee (minimal fee for account maintenance and transfers), and Stamp Duty as per government regulations.",
     "category": "faq"
   },
   {
-    "question": "What types of orders are supported?",
-    "expected_answer": "The platform supports market orders, limit orders, stop-loss orders, and stop-limit orders. Advanced users can access bracket orders and trailing stops.",
+    "question": "What is the first step to invest in CSE?",
+    "expected_answer": "To trade in listed securities, it is mandatory for investors to open a CDS account through an authorized Stock Broker Firm. A CDS account acts as a means of representing ownership and movement of securities listed on the CSE.",
     "category": "faq"
   },
   {
-    "question": "Is margin trading available?",
-    "expected_answer": "Yes, margin trading is available for approved accounts with a minimum equity of $2,000. You can borrow up to 2x your account value.",
+    "question": "Who can open a CDS account?",
+    "expected_answer": "A Client Account in CDS can be opened by a person who is 18 years or above, duly incorporated local or foreign companies, or a statutory body. You must have the legal capacity to open a CDS account.",
     "category": "faq"
   },
   {
-    "question": "What is the current price of AAPL?",
-    "expected_answer": "The current price varies. I'll fetch the real-time price for you.",
-    "category": "advisor"
-  },
-  {
-    "question": "Buy 10 shares of AAPL",
-    "expected_answer": "I'll execute a buy order for 10 shares of AAPL at the current market price.",
-    "category": "advisor"
-  },
-  {
-    "question": "Show my portfolio",
-    "expected_answer": "Here is your current portfolio with holdings and cash balance.",
-    "category": "advisor"
-  },
-  {
-    "question": "Calculate my budget if I earn $5000 and spend $3000",
-    "expected_answer": "With $5000 income and $3000 expenses, you have $2000 available for investment.",
-    "category": "advisor"
-  },
-  {
-    "question": "What is the pattern day trader rule?",
-    "expected_answer": "The pattern day trader rule requires a minimum of $25,000 in your account if you make 4 or more day trades within 5 business days.",
+    "question": "How many stockbroker firms are there in CSE?",
+    "expected_answer": "There are 29 licensed stock broking firms in the CSE, including one Debt Trading Member.",
     "category": "faq"
+  },
+  {
+    "question": "What is the settlement cycle for CSE?",
+    "expected_answer": "The CSE operates on a T+3 settlement cycle, meaning transactions are settled 3 business days after the trade date. Payment must be made by buyers and shares must be delivered by sellers on T+3.",
+    "category": "faq"
+  },
+  {
+    "question": "What is the SEC?",
+    "expected_answer": "The Securities and Exchange Commission of Sri Lanka (SEC) was established by the Securities and Exchange Commission Act No. 19 of 2021. It is the regulatory authority that oversees the securities market to ensure it is fair, efficient, orderly and transparent.",
+    "category": "regulations"
+  },
+  {
+    "question": "What are the main functions of the SEC?",
+    "expected_answer": "The main functions of SEC include: granting licences or registrations to engage in regulated capital market activities, regulating the listing and issue of securities on CSE, investigating violations of SEC Act and regulations, reviewing market disclosures, supervising regulated entities, and regulating take-overs or mergers.",
+    "category": "regulations"
+  },
+  {
+    "question": "What is ASPI?",
+    "expected_answer": "The All Share Price Index (ASPI) is the main market index of the CSE that measures the overall performance of all listed companies on the exchange. It is a market capitalization-weighted index.",
+    "category": "faq"
+  },
+  {
+    "question": "What is S&P SL20?",
+    "expected_answer": "The S&P SL20 is an index comprising the 20 largest and most liquid stocks listed on the CSE. It is jointly maintained by S&P Dow Jones Indices and the CSE, representing the blue-chip segment of the market.",
+    "category": "faq"
+  },
+  {
+    "question": "How do I buy shares in an IPO?",
+    "expected_answer": "To buy shares in an IPO: 1) Open a CDS account through a stockbroker, 2) Watch for IPO announcements, 3) Obtain the company's Prospectus, 4) Read it carefully and complete the application form with your CDS account number and NIC, 5) Send the form with payment before the closing day, 6) Allotted shares are credited to your CDS account electronically.",
+    "category": "faq"
+  },
+  {
+    "question": "What types of orders can I place on CSE?",
+    "expected_answer": "You can place various types of orders including Market Orders (executed immediately at current market price), Limit Orders (executed only at your specified price or better), Day Orders (valid only for the current trading day), and Good Till Cancelled (GTC) orders (valid until you cancel or until a specified date).",
+    "category": "faq"
+  },
+  {
+    "question": "When was CSE established?",
+    "expected_answer": "Share trading in Sri Lanka began in 1896 under the Colombo Share Brokers Association. The modern Colombo Stock Exchange was formally established in 1985 through the amalgamation of the Colombo Brokers Association and the Stock Brokers Association.",
+    "category": "organization"
+  },
+  {
+    "question": "Is CSE a member of any international organizations?",
+    "expected_answer": "Yes, CSE is a member of several international organizations: World Federation of Exchanges (WFE) since 1998 (first South Asian member), founding member of South Asian Federation of Exchanges (SAFE) since 2000, and member of UN Sustainable Stock Exchanges (SSE) Initiative since 2015.",
+    "category": "organization"
+  },
+  {
+    "question": "Where is CSE located?",
+    "expected_answer": "The CSE head office is located at 04-01, West Block, World Trade Center, Echelon Square, Colombo 01, Sri Lanka. Phone: +94 11 2356456, Email: info@cse.lk",
+    "category": "organization"
+  },
+  {
+    "question": "Does CSE have regional branches?",
+    "expected_answer": "Yes, CSE maintains regional presence in Kandy, Kurunegala, Negombo, Jaffna, Anuradhapura, Hambantota, Ratnapura, Ambalantota, and Matara.",
+    "category": "organization"
+  },
+  {
+    "question": "What is CDS?",
+    "expected_answer": "Central Depository Systems (Pvt.) Ltd. (CDS) is a wholly owned subsidiary of CSE established in 1991. It acts as a depository for securities traded on CSE and facilitates settlement. It offers the e-Connect facility for online account access.",
+    "category": "faq"
+  },
+  {
+    "question": "How do I monitor my investments on CSE?",
+    "expected_answer": "You can monitor your investments by calling your stockbroker, reading daily newspapers, accessing the CSE website at www.cse.lk, accessing your stockbroker's website, visiting stockbroker branch offices, or checking monthly CDS statements if your account was active.",
+    "category": "faq"
+  },
+  {
+    "question": "What is the minimum amount required to start trading?",
+    "expected_answer": "While there is no official minimum, most brokers recommend starting with at least LKR 50,000 to 100,000 to ensure you can diversify your portfolio and cover transaction costs effectively.",
+    "category": "faq"
+  },
+  {
+    "question": "Can I trade on mobile?",
+    "expected_answer": "Yes, the CSE has official mobile applications available on both Apple App Store and Google Play Store. Additionally, most Stock Broker Firms offer their own mobile trading platforms with full trading functionality.",
+    "category": "faq"
+  },
+  {
+    "question": "Who is the CEO of CSE?",
+    "expected_answer": "Mr. Rajeeva Bandaranaike is the Chief Executive Officer of CSE, with Ms. Vindhya Jayasekera as the Chief Executive Officer - Designate.",
+    "category": "organization"
+  },
+  {
+    "question": "Who is the Chairman of CSE?",
+    "expected_answer": "Mr. Dimuthu Abeyesekera is the Chairman of the Board of Directors of the Colombo Stock Exchange.",
+    "category": "organization"
+  },
+  {
+    "question": "What certifications does CSE have?",
+    "expected_answer": "In 2013, CSE became the first global exchange to achieve all three certifications: ISO 27001 (Information Security Management System), ISO 22301 (Business Continuity Management System), and ISO 20000 (Information Technology Service Management).",
+    "category": "organization"
+  },
+  {
+    "question": "How do I place an order with a stockbroker?",
+    "expected_answer": "To place an order: contact your broker through phone, fax, email, personal visit, or internet; provide the company name, price, and number of shares you want to buy/sell; the investment advisor will place your order; you will receive a Bought/Sold note confirming the transaction; payment occurs by T+3.",
+    "category": "faq"
+  },
+  {
+    "question": "What should first-time investors consider when investing in an IPO?",
+    "expected_answer": "First-time investors should pay attention to: business environment of the company, management quality, future earnings and valuation, competition in the industry, tax incentives available, and research and valuation reports issued by stock brokers or independent organizations.",
+    "category": "faq"
+  },
+  {
+    "question": "Are dividends credited automatically?",
+    "expected_answer": "Yes, dividends are credited directly to your bank account linked to your CDS account. Make sure your bank details are up-to-date with your broker and the CDS. Dividend payments are typically made within 30 days of the declaration date.",
+    "category": "faq"
+  },
+  {
+    "question": "Can I transfer shares to another person?",
+    "expected_answer": "Yes, shares can be transferred through an off-market transfer process. Both parties must have CDS accounts, and the transfer must be processed through your Stock Broker with proper documentation. Transfer fees may apply.",
+    "category": "faq"
+  },
+  {
+    "question": "What is the role of SEC in the capital market?",
+    "expected_answer": "The SEC regulates the capital market to ensure it is fair, efficient, orderly and transparent. It maintains a regulatory framework that upholds quality disclosures, enhances corporate governance, prevents market abuse and promotes standards of conduct for market participants.",
+    "category": "regulations"
+  },
+  {
+    "question": "When did automated trading start on CSE?",
+    "expected_answer": "Automation of trading began in 1997 with the installation of a state-of-the-art Screen Based Trading System (ATS), replacing the open outcry system. The system has been upgraded multiple times, with version 7.14 launched in 2013.",
+    "category": "organization"
   }
 ]

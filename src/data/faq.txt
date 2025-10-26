@@ -1,31 +1,264 @@
-Frequently Asked Questions - Trading Platform
+Frequently Asked Questions - Colombo Stock Exchange Trading Platform
 
-Q: What are the trading fees?
-A: Our platform charges a competitive fee of 0.1% per transaction for stock trades. There are no monthly account maintenance fees. Commission-free trading is available for accounts with a balance over $10,000.
+=== GETTING STARTED ===
 
-Q: How do I create an account?
-A: You can create an account by visiting our website and clicking "Sign Up". You'll need to provide your email, create a password, and complete identity verification. The process typically takes 5-10 minutes.
+Q: What is the Colombo Stock Exchange (CSE)?
+A: The Colombo Stock Exchange is the primary stock exchange in Sri Lanka, established in 1985. It provides a regulated marketplace for trading shares of listed companies. The CSE operates two main indices: the All Share Price Index (ASPI) and the S&P SL20 Index.
 
-Q: What are the minimum deposit requirements?
-A: The minimum initial deposit is $100. However, we recommend starting with at least $500 to have sufficient funds for diversified trading.
+Q: Why should I invest in the Stock Market?
+A: A stock market investment is one of many potential investment vehicles where you can invest your disposable income and reap returns from its growth over time. Stock prices rise and fall daily, and investing in stable stocks can make you a profit at the point of sale. In addition to capital gains, you would also receive dividends declared by companies.
+
+Q: What is the First Step of Investing?
+A: In order to trade in listed securities, it has been made mandatory for investors to open a CDS account through an authorized Stock Broker Firm. A CDS account is similar to a standard bank deposit account and acts as a means of representing ownership and movement of securities Listed on the CSE. Securities purchased will be credited into your CDS account and similarly securities that are sold on the market will be debited from your CDS accounts. Central Depository Systems (Pvt.) Ltd. (CDS), a wholly owned subsidiary of the Colombo Stock Exchange (CSE) and acts as a depository in respect of Securities traded on the CSE and additionally to facilitate settlement for securities that are traded.
+
+Q: Who can open a CDS account?
+A: A Client Account in CDS can be opened by a person who is 18 years or above, duly incorporated local or foreign companies or a statutory body. You are also expected to have the legal capacity to open a CDS account. A CDS account shall not be opened by investors who are prohibited to transact under any Law and/or regulation.
+
+Q: How do I create a CDS account?
+A: You can create a CDS account by contacting any of the 29 licensed stock broking firms (including one Debt Trading Member of the CSE) or a custodian bank. The duly completed Client Account Opening Forms together with the relevant supporting documents (copy of the national identity card and a billing proof) must be handed over to the stockbroker or a custodian bank. Read and understand the contents of the forms prior to submission. The CDS system will generate a Client Account Number and this would be handed over to the stockbroker or a custodian bank confirming the CDS account opening.
+
+Q: What is the role of a Stock Broker Firm?
+A: An investor is not permitted to directly transact in securities listed on the CSE. Instead, investors are required to carry out transactions through authorized Stock Broker Firms. These firms execute buy and sell orders on your behalf, provide market research, and offer investment advice.
+
+=== TRADING OPERATIONS ===
+
+Q: What are the CSE trading hours?
+A: The CSE operates from Monday to Friday (except public holidays). Trading sessions are typically from 9:30 AM to 2:30 PM Sri Lanka Time. Pre-opening and post-closing sessions may also be available for order placement.
+
+Q: How to buy/sell shares in the Primary Market and the Secondary Market?
+A: 
+**Primary Market (Initial Public Offering - IPO):**
+1. Open a CDS account through a stockbroker or custodian bank
+2. Watch for IPO announcements through newspapers, websites, radio, and television
+3. Obtain the company's Prospectus free of cost from stockbroker/Managers to the issue/CSE/Bankers/company website
+4. Read the Prospectus carefully and complete the application form accurately (investors must be 18 years or above)
+5. Indicate your CDS account number, National Identity Card number, and signature on the application form
+6. Send the form with payment (cheque/bank draft) to the company/stockbroker/custodian bank/Managers to the issue before the closing day
+7. After the issue closes, the company evaluates demand and announces share distribution in case of oversubscription
+8. Allotted shares are credited to your CDS account electronically (no physical certificates issued from June 30, 2012)
+9. Refunds for partial allotment are made within 10 Market days of the closing date
+10. Trading commences within a few Market days after the IPO closes
+
+**Secondary Market:**
+1. Contact your stockbroker to buy/sell shares from other investors
+2. Deposit any physical share certificates in your CDS account (deadline was June 30, 2012)
+3. You can maintain one or more CDS accounts through the 28 stock broker companies
+4. Deal only with "Certified Investment Advisors"
+5. Contact your broker via phone, fax, email, personal visit, or internet
+6. Provide the company name, price, and number of shares you want to buy/sell
+7. Once executed, you receive a Bought/Sold note before the next trading session
+8. Payment/receipt occurs by T+3 (3rd trading day after transaction)
+9. First-time investors may need to make advance payment
+10. You can change brokers through CDS without making a payment
+
+Q: How do you place an order with a Stockbroker?
+A: To place an order:
+1. Ensure you have a CDS account with shares deposited (physical certificates should have been deposited by June 30, 2012)
+2. Your stockbroker will allocate you an investment advisor - make sure to deal only with "Certified Investment Advisors"
+3. Contact your broker through phone, fax, email, personal visit, or internet
+4. Provide the name of the company, price, and amount of shares you want to buy/sell
+5. The investment advisor will place your order, but the ultimate decision to buy/sell should be taken by you
+6. Once processed, you will be informed of the shares purchased at your required price
+7. You will receive a Bought/Sold note confirming the transactions before the next trading session
+8. The buyer must pay by T+3 (3rd trading day after purchase); first-time investors may need advance payment
+9. The seller receives payment by T+3 (3rd trading day after sale)
+10. Note: Investment advisors shall not buy/sell shares without your instructions. If there is a query, contact the Compliance Officer immediately
+
+Q: How can I monitor my investments?
+A: You can monitor your investments through:
+- Calling your stockbroker
+- Reading daily newspapers
+- Accessing the CSE website at www.cse.lk
+- Accessing your stockbroker's website
+- Visiting stockbroker branch offices in Matara, Kandy, Kurunegala, Negombo, Anuradhapura, Jaffna, Ratnapura, and Ambalantota
+- Checking monthly CDS statements if your account was active (at least one transaction during the month)
+
+Q: What should first-time investors pay attention to when investing in an IPO?
+A: First-time investors should pay attention to:
+- Business environment of the company
+- Management of the company
+- Future earnings and valuation
+- Competition in the industry
+- Tax incentives available
+- Research and valuation reports issued by stock brokers or independent organizations
+You can obtain this information from an investment advisor.
 
 Q: What types of orders can I place?
-A: We support market orders, limit orders, stop-loss orders, and stop-limit orders. Advanced users can also access bracket orders and trailing stops.
+A: You can place various types of orders including:
+- Market Orders: Executed immediately at the current market price
+- Limit Orders: Executed only at your specified price or better
+- Day Orders: Valid only for the current trading day
+- Good Till Cancelled (GTC): Valid until you cancel or until a specified date
 
-Q: How long does it take to withdraw funds?
-A: Standard withdrawals are processed within 1-3 business days. Expedited withdrawals (available for a $25 fee) can be processed within 24 hours.
+Q: What are the trading fees and charges?
+A: Trading on the CSE involves several charges:
+- Brokerage Commission: Typically 0.5% to 1.5% of transaction value (negotiable with your broker)
+- SEC Levy: 0.05% of transaction value
+- CDS Fee: Minimal fee for account maintenance and transfers
+- Stamp Duty: As per government regulations
+Please check with your specific broker for exact fee structures.
 
-Q: Is my money safe?
-A: Yes, all accounts are SIPC insured up to $500,000. We also use bank-level encryption and two-factor authentication to protect your account.
-
-Q: What markets can I trade?
-A: You can trade US stocks (NYSE, NASDAQ), ETFs, and options. International markets are available for premium accounts.
-
-Q: Do you offer margin trading?
-A: Yes, margin trading is available for approved accounts. You must maintain a minimum equity of $2,000 and can borrow up to 2x your account value.
-
-Q: How do I contact customer support?
-A: Our customer support team is available 24/7 via live chat, email (support@tradingplatform.com), or phone (1-800-TRADE-24).
+Q: What is the minimum amount required to start trading?
+A: While there is no official minimum, most brokers recommend starting with at least LKR 50,000 to 100,000 to ensure you can diversify your portfolio and cover transaction costs effectively.
 
 Q: Can I trade on mobile?
-A: Yes, we have mobile apps for both iOS and Android devices with full trading functionality.
+A: Yes, the CSE has official mobile applications available on both Apple App Store and Google Play Store. Additionally, most Stock Broker Firms offer their own mobile trading platforms with full trading functionality.
+
+=== MARKET INFORMATION ===
+
+q.Will I be able to realize a fair valuation for my company?
+The valuation attributed to your company will reflect the current consensus among market participants of risk associated with it and the growth outlook. Although past performance is not necessarily considered an indicator of future profitability, a historical track record of consistent revenue and profits would create positive sentiment and set the stage for an optimistic outlook.
+
+
+A company may also command a higher valuation when there is an impending change in the outlook for the company/ industry, heralding a significant increase in revenue and earnings. Of course, there should be high certainty of such an inflection point in the near future.
+
+
+The establishment of the IPO offer price is an iterative process between you, the investment bank managing the listing, and key investors. After conducting due diligence on your company, the investment bank will carry out a valuation, usually based on or a combination of several standard methods.
+
+
+Q: What would attract high-quality shareholders to my company at the IPO and thereafter?
+Investors who buy company shares with the intention of participating in the risks and rewards of its longterm growth would be considered high-quality shareholders. These investors usually include institutional investors (for example, asset managers, pension funds, long-only hedge funds, and insurance companies) and strategic stake holders.
+
+
+Their investment horizons are usually a few years, in contrast to the hours/ days investment horizons of day-traders and short-term investors. High-quality shareholders usually focus on factors that drive a company’s strategic direction and long-term growth. They look for businesses with competitive advantages in their industry, and potential to derive strong growth using that advantage. Another key attribute these investors look for is stable management focused on investing in projects that generate returns higher than cost of capital.
+
+Q: Will the share price fall if my company misses earnings estimates?
+Market participants form expectations of future earnings based on industry conditions and the business prospects companies disclose during regular investor updates. Estimates formed by sell-side analysts (research analysts at investment banks/brokerage houses) are widely disseminated, and a summary of these forecasts are collated into consensus estimates.
+
+
+Exceeding these estimates usually causes a surge in the share price, while minor misses are rarely disastrous since seasoned investors understand cyclical variations in business. At the same time frequent missed estimates do establish a negative precedent that could adversely affect the share price.
+
+Q: Will my company be expected to pay regular dividends?
+Whether your policy is to pay out dividends or to re-invest in projects that generate returns higher than the cost of equity, the critical need is to clearly convey your dividend policy to shareholders. The company’s ability to pay a regular stream of dividends is the key factor controlling the dividend decision, and therefore, it is mature companies with steady and predictable cash flows that usually choose to create shareholder returns via dividends.
+
+
+Companies in the high-growth phase of the business cycle generally choose to re-invest and create shareholder returns via share price growth and capital gains. A dividend is usually not expected from such companies; if a company wishes to pay out a dividend to share the benefits of a specific gain (for example, profit from a disposal of a segment), it could be paid in the form of a special dividend.
+
+
+There is no legal requirement to pay out dividends to ordinary shareholders. However, there are certain compelling factors to consider in determining your company’s dividend policy:
+
+
+Steady dividends usually indicate strong performance and sound management to all stakeholders, including investors, debtors, suppliers, and the media. A company that pays out a steady growing dividend would be rewarded with a higher valuation.
+Capital gains are influenced by investor sentiment. Hence, in times of share price volatility and low interest rates, investors may favour steady dividend-paying stocks that provide predictable returns.
+
+
+Q: What is ASPI?
+A: The All Share Price Index (ASPI) is the main market index of the CSE that measures the overall performance of all listed companies on the exchange. It is a market capitalization-weighted index.
+
+Q: What is S&P SL20?
+A: The S&P SL20 is an index comprising the 20 largest and most liquid stocks listed on the CSE. It is jointly maintained by S&P Dow Jones Indices and the CSE, representing the blue-chip segment of the market.
+
+Q: How do I check current share prices?
+A: You can check current share prices through:
+- The official CSE website (www.cse.lk)
+- CSE mobile applications
+- Your Stock Broker's trading platform
+- Financial news websites and market data providers
+
+Q: What information is available in corporate disclosures?
+A: Corporate disclosures on the CSE include:
+- Financial Reports (Quarterly and Annual)
+- Dividend Announcements
+- Rights Issues and Share Buybacks
+- Director Dealings and Appointments
+- Material Events affecting the company
+- Compliance and Regulatory Notices
+
+=== ACCOUNT & SECURITY ===
+
+Q: Is my money and shares safe?
+A: Yes, the CSE operates under strict regulatory oversight by the Securities and Exchange Commission of Sri Lanka (SEC). All shares are held electronically in the Central Depository Systems (CDS), ensuring secure ownership. Broker accounts are segregated from broker's own funds for investor protection.
+
+Q: How are my shares held?
+A: Shares are held electronically in your CDS account in dematerialized (electronic) form. You will receive a CDS account statement showing your holdings. Physical share certificates are no longer issued for most securities.
+
+Q: What should I do if I forget my trading account password?
+A: Contact your Stock Broker Firm immediately through their customer service channels. They will guide you through their password reset procedure, which typically involves identity verification for security purposes.
+
+=== TRANSACTIONS & SETTLEMENTS ===
+
+Q: How long does it take to settle a trade?
+A: The CSE operates on a T+2 settlement cycle, meaning transactions are settled 2 business days after the trade date. On T+2, payment must be made by buyers and shares must be delivered by sellers.
+
+Q: How do I receive dividends?
+A: Dividends are credited directly to your bank account linked to your CDS account. Make sure your bank details are up-to-date with your broker and the CDS. Dividend payments are typically made within 30 days of the declaration date.
+
+Q: How long does it take to withdraw funds?
+A: Withdrawal of funds from your trading account typically takes 1-3 business days, depending on your broker's procedures and your bank's processing time. Ensure you have settled all pending transactions before requesting withdrawals.
+
+Q: Can I transfer shares to another person?
+A: Yes, shares can be transferred through an off-market transfer process. Both parties must have CDS accounts, and the transfer must be processed through your Stock Broker with proper documentation. Transfer fees may apply.
+
+=== LISTINGS & IPOs ===
+
+Q: Are there any advantages to a public listing versus a private placement?
+A: Raising equity through a private placement of a stake with a private equity firm or a high net-worth investor is an alternative to an IPO. However, private placements suffer from several inherent disadvantages relative to a public listing:
+
+Easy entry, difficult exit: A stake sale is certainly much less complicated than the listing process. However, there are limited exit options except for a buy-out or an IPO/Introduction at a later date. Listing Shares, on the other hand provides a mechanism for orderly exit of existing shareholders.
+A one-time event: A private placement is a one-off event. Fundraising for the next phase of growth requires a repetition of the same process. On the other hand, an IPO/Introduction paves the way to a very deep pool of capital, both debt and equity, to which the company can subsequently return repeatedly for fundraising through a less onerous process.
+Low visibility: Private placements do not offer the benefits of increased visibility, investor interest, media coverage etc., which a public listing can bring to a company.
+Decreased control: Presence on the Board of Directors or involvement in management may be conditions allied with a private equity placement, unlike in the case of a public listing, where the majority shareholder generally retains control.
+
+
+Q: How can I participate in Initial Public Offerings (IPOs)?
+A: To participate in an IPO, you need to have an active CDS account through a Stock Broker. When a company announces an IPO, you can submit your application through your broker during the subscription period. Allotment is based on the company's allocation criteria.
+
+Q: What would attract high-quality shareholders to a company at IPO?
+A: Key factors include strong financial performance, transparent governance, clear growth strategy, competitive industry position, reasonable valuation, experienced management team, and regular communication with investors.
+
+=== REGULATIONS & COMPLIANCE ===
+
+Q: What is the SEC?
+A: The establishment and constitution of the Securities and Exchange Commission of Sri Lanka was initially provided for by the Securities and Exchange Commission Act No. 36 of 1987 (as amended by Act No. 26 of 1991 and Act No. 18 of 2003). The said Act has now been repealed and replaced by the Securities and Exchange Commission Act No. 19 of 2021.
+
+Q: What is the role of the SEC?
+A: Capital markets are a crucial part of an economy because they transfer money from the people who have to those who need it for productive use. i.e. long-term funds are raised by the business community and the public gets the opportunity to invest their savings for higher returns. The SEC is tasked with regulating the capital market to ensure that the capital market is fair, efficient, orderly and transparent. To achieve these objectives the SEC maintains a regulatory framework that upholds quality disclosures, enhances corporate governance, prevents market abuse and promotes standards of conduct for market participants.
+
+Q: What are the main functions of the SEC?
+A: The main functions of the SEC include:
+- Grant licences or registrations to engage in regulated capital market activities
+- Give general or specific directions to licensed or registered entities
+- Regulate the listing and issue of securities on the Colombo Stock Exchange
+- Investigate into any alleged violation or contravention of the provisions of the SEC Act, Rule and Regulations
+- Review market disclosures and other information that listed companies are required to disseminate to the public to reduce asymmetry of information
+- Supervise regulated entities to ensure on-site and off-site supervision on the financial viability and business conduct
+- Issue general or specific directives to Listed Public Companies
+- Regulate take-overs or mergers
+
+Q: What happens if a company misses earnings estimates?
+A: While missing earnings estimates can lead to short-term share price volatility, the long-term impact depends on the reasons for the miss, management's response, and overall company fundamentals. The CSE has mechanisms to monitor and address unusual price movements.
+
+Q: Are companies expected to pay regular dividends?
+A: While there is no mandatory requirement to pay dividends, many established companies on the CSE maintain regular dividend policies. Dividend decisions depend on company profitability, cash flow, growth plans, and board discretion. Companies must disclose their dividend policies to shareholders.
+
+Q: What is the Watchlist?
+A: The CSE maintains a Watchlist for securities that fail to meet certain listing requirements or compliance standards. Securities on the Watchlist face trading restrictions and must meet specific criteria to be removed.
+
+=== SUPPORT & RESOURCES ===
+
+Q: How do I contact CSE customer support?
+A: You can contact the Colombo Stock Exchange at:
+- Address: 04-01, West Block, World Trade Center, Echelon Square, Colombo 01, Sri Lanka
+- Phone: +94 11 2356456
+- Fax: +94 11 2445279
+- Email: info@cse.lk
+- Website: www.cse.lk
+
+Q: Where can I find educational resources about stock market investing?
+A: The CSE provides:
+- Educational videos on their website
+- Investor awareness programs
+- Online tutorials and guides
+- Regular webinars and seminars
+- Market data and research reports
+Visit the CSE website's investor education section for comprehensive learning materials.
+
+Q: What is eConnect?
+A: eConnect is an electronic service provided by the CDS that allows investors to view their shareholdings, transaction history, and dividend information online. You can access it through the CDS website using your credentials.
+
+Q: How can I file a complaint about my broker?
+A: If you have issues with your Stock Broker, you should:
+1. First raise the issue directly with the broker's compliance officer
+2. If unresolved, contact the CSE's Investor Relations Department
+3. You can also file a complaint with the Securities and Exchange Commission (SEC)
+All brokers are required to have proper grievance handling mechanisms.
