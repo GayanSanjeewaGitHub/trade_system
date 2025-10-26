@@ -407,7 +407,7 @@ async def evaluate_groundtruth(request: Request, limit: Optional[int] = None):
     
     try:
         # Load ground truth data
-        ground_truth_path = Path("src/data/ground_truth.py/test_qa_pairs.json")
+        ground_truth_path = Path("src/data/ground_truth/test_qa_pairs.json")
         
         if not ground_truth_path.exists():
             raise HTTPException(

@@ -210,3 +210,35 @@ __marimo__/
 .env
 .venv
 .venv/
+
+# Project-specific ignores
+logs/*.log
+logs/*.json
+logs/evaluation_results.json
+data/uploads/
+data/temp/
+*.sqlite
+*.db
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# Docker volumes
+docker-volumes/
+.docker/

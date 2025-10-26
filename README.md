@@ -2,6 +2,69 @@
 
 A production-ready agentic chatbot for financial trading operations with RAG, multi-agent orchestration, tool integration, and comprehensive monitoring.
 
+Screen Shots :
+Home Page
+
+![alt text](image.png)
+
+
+
+Ingestion Page
+
+![alt text](image-1.png)
+
+
+
+
+FAQ Agent Usage
+
+![alt text](image-2.png)
+
+
+
+
+Advisor Agent Usage
+![alt text](image-3.png)
+
+
+
+matrixs :
+![alt text](image-4.png)
+
+
+Evaluation Report
+
+
+Ingestion FAG: 
+
+![alt text](image-5.png)
+![alt text](image-6.png)
+ 
+![alt text](image-7.png)
+![alt text](image-8.png)
+
+
+
+
+
+
+Guard Rails
+![alt text](image-9.png)
+
+Langfuse:
+![alt text](image-10.png)
+![alt text](image-12.png)
+
+Internal Answer Evaluation :
+
+![alt text](image-11.png)
+![alt text](image-13.png)
+
+
+
+
+
+
 ## 🚀 Quick Start
 
 ```powershell
@@ -854,5 +917,13 @@ function Start-TradingFrontend { cd frontend; .\START.bat; cd .. }
 ```
 
 ---
+
+
+Start with:
+docker-compose -f docker/docker-compose.yml up --build
+
+front end 
+cd .\frontend\
+.\START.bat
 
 **Built with ❤️ using FastAPI, LangGraph, Pinecone, and Langfuse**

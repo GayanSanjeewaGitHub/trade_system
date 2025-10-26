@@ -400,7 +400,7 @@ async def main():
         
         # Load ground truth (path relative to project root)
         project_root = Path(__file__).parent.parent.parent
-        ground_truth_path = project_root / "src" / "data" / "ground_truth.py" / "test_qa_pairs.json"
+        ground_truth_path = project_root / "src" / "data" / "ground_truth" / "test_qa_pairs.json"
         ground_truth = await evaluator.load_ground_truth(str(ground_truth_path))
         
         if not ground_truth:
