@@ -32,6 +32,12 @@ class AdvisorAgent:
         try:
             logger.info("Initializing Advisor agent")
             
+            # Check if OpenAI API key is configured
+            if not settings.openai_api_key or settings.openai_api_key == "your-openai-api-key":
+                logger.warning("OpenAI API key not configured, Advisor agent will be limited")
+                self.llm = None
+                return
+            
             self.llm = ChatOpenAI(
                 model=settings.llm_model,
                 temperature=settings.llm_temperature,
@@ -97,6 +103,26 @@ class AdvisorAgent:
         try:
             logger.info("Processing Advisor query", session_id=session_id)
             
+            # Check if agent is properly initialized
+            if not self.llm or not self.agent_executor:
+                fallback_response = """I'm here to help with trading and investment activities on the CSE platform.
+                However, my trading capabilities are currently not available. I can help with:
+                - Buying and selling shares/stocks
+                - Checking current stock prices
+                - Portfolio management and analysis
+                - Investment planning and advice
+                - Market analysis and trends
+                - Dividend information
+                - Broker services and recommendations
+                
+                Please ensure the system is properly configured to enable trading features."""
+                
+                return {
+                    "response": fallback_response,
+                    "tools_used": [],
+                    "confidence": 0.0
+                }
+            
             # Execute agent
             result = await self.agent_executor.ainvoke({
                 "input": query,
@@ -128,7 +154,7 @@ class AdvisorAgent:
         except Exception as e:
             logger.error("Advisor processing failed", error=str(e), session_id=session_id, exc_info=True)
             return {
-                "response": "I encountered an error processing your trading request. Please try again.",
+                "response": "I encountered an error processing your trading request. Please try again or contact support if the issue persists.",
                 "tools_used": [],
                 "error": str(e)
             }

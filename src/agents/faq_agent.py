@@ -77,12 +77,16 @@ class FAQAgent:
             if not retrieved_docs:
                 # If no retriever or no documents found, provide a general response
                 if not self.retriever:
-                    fallback_response = """I'm here to help with general questions about trading and financial services. 
-                    However, my knowledge base is currently not available. I can still try to help with basic questions about:
-                    - Account management
-                    - Trading basics
-                    - Platform features
-                    - General financial terms
+                    fallback_response = """I'm here to help with questions about the Colombo Stock Exchange (CSE) trading platform. 
+                    However, my knowledge base is currently not available. I can still try to help with questions about:
+                    - CDS account opening and management
+                    - CSE trading procedures and regulations
+                    - Stock broker services and fees
+                    - IPO participation and listings
+                    - SEC regulations and compliance
+                    - Trading hours and settlement cycles
+                    - Dividend payments and transfers
+                    - Account statements and withdrawals
                     
                     Please ask your question and I'll do my best to help!"""
                 else:

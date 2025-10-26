@@ -57,7 +57,7 @@ class Settings(BaseSettings):
     # RAG Configuration
     chunk_size: int = 1000
     chunk_overlap: int = 200
-    top_k_results: int = 5
+    top_k_results: int = 8
     similarity_threshold: float = 0.7
     embedding_model: str = "text-embedding-3-small"
 
