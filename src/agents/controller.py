@@ -14,7 +14,8 @@ from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import create_react_agent
  
 from langgraph.prebuilt import ToolNode
-from langfuse.langchain  import CallbackHandler
+from langfuse.langchain import CallbackHandler
+from langfuse import Langfuse, get_client
 
 from src.config.settings import settings
 from src.agents.faq_agent import FAQAgent
@@ -71,21 +72,38 @@ class ControllerAgent:
             logger.info("Initializing controller agent")
             
             # Initialize LLM
-            self.llm = ChatOpenAI(
-                model=settings.llm_model,
-                temperature=settings.llm_temperature,
-                max_tokens=settings.llm_max_tokens,
-                timeout=settings.llm_timeout,
-                api_key=settings.openai_api_key
-            )
+            if settings.openai_api_key and settings.openai_api_key != "your-openai-api-key":
+                self.llm = ChatOpenAI(
+                    model=settings.llm_model,
+                    temperature=settings.llm_temperature,
+                    max_tokens=settings.llm_max_tokens,
+                    timeout=settings.llm_timeout,
+                    api_key=settings.openai_api_key
+                )
+            else:
+                logger.warning("OpenAI API key not configured, controller will have limited functionality")
+                self.llm = None
             
             # Initialize Langfuse handler
-            if settings.langfuse_enabled:
-                self.langfuse_handler = CallbackHandler(
-                    public_key=settings.langfuse_public_key,
-                    secret_key=settings.langfuse_secret_key,
-                    host=settings.langfuse_host
-                )
+            if (settings.langfuse_enabled and 
+                settings.langfuse_public_key != "your-langfuse-public-key" and
+                settings.langfuse_secret_key != "your-langfuse-secret-key"):
+                try:
+                    # Initialize Langfuse client first
+                    Langfuse(
+                        public_key=settings.langfuse_public_key,
+                        secret_key=settings.langfuse_secret_key,
+                        host=settings.langfuse_host
+                    )
+                    # Create handler without parameters (uses environment variables or client config)
+                    self.langfuse_handler = CallbackHandler()
+                    logger.info("Langfuse handler initialized")
+                except Exception as langfuse_error:
+                    logger.warning("Failed to initialize Langfuse handler", error=str(langfuse_error))
+                    self.langfuse_handler = None
+            else:
+                logger.info("Langfuse not configured or disabled")
+                self.langfuse_handler = None
             
             # Initialize sub-agents
             self.faq_agent = FAQAgent()
@@ -232,7 +250,16 @@ class ControllerAgent:
         try:
             user_input = state["user_input"]
             
-            classification_prompt = f"""Analyze the following user message and classify it into one of these categories:
+            if not self.llm:
+                # Simple keyword-based classification if no LLM available
+                user_input_lower = user_input.lower()
+                if any(keyword in user_input_lower for keyword in ["buy", "sell", "trade", "stock", "price", "invest", "portfolio"]):
+                    intent = "ADVISOR"
+                else:
+                    intent = "FAQ"
+                logger.info("Intent classified using keywords", intent=intent)
+            else:
+                classification_prompt = f"""Analyze the following user message and classify it into one of these categories:
 
 1. FAQ: General questions about policies, fees, account management, product information
 2. ADVISOR: Trading actions, stock prices, portfolio management, investment advice
@@ -240,11 +267,11 @@ class ControllerAgent:
 User message: {user_input}
 
 Respond with just the category name (FAQ or ADVISOR)."""
+                
+                messages = [SystemMessage(content=classification_prompt)]
+                response = await self.llm.ainvoke(messages)
+                intent = response.content.strip().upper()
             
-            messages = [SystemMessage(content=classification_prompt)]
-            response = await self.llm.ainvoke(messages)
-            
-            intent = response.content.strip().upper()
             state["context"]["classified_intent"] = intent
             
             logger.info("Intent classified", intent=intent, session_id=state["session_id"])

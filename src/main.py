@@ -131,7 +131,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 
 @app.get("/health", response_model=HealthResponse, tags=["System"])
-@limiter.limit("10/minute")
+@limiter.limit("1000/minute")
 async def health_check(request: Request):
     """
     Health check endpoint.

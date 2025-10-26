@@ -27,17 +27,25 @@ class FAQAgent:
         try:
             logger.info("Initializing FAQ agent")
             
-            self.llm = ChatOpenAI(
-                model=settings.llm_model,
-                temperature=0.3,  # Lower temperature for factual responses
-                max_tokens=settings.llm_max_tokens,
-                api_key=settings.openai_api_key
-            )
+            # Check if OpenAI API key is configured
+            if not settings.openai_api_key or settings.openai_api_key == "your-openai-api-key":
+                logger.warning("OpenAI API key not configured, FAQ agent will be limited")
+                self.llm = None
+            else:
+                self.llm = ChatOpenAI(
+                    model=settings.llm_model,
+                    temperature=0.3,  # Lower temperature for factual responses
+                    max_tokens=settings.llm_max_tokens,
+                    api_key=settings.openai_api_key
+                )
             
             self.retriever = RAGRetriever()
-            await self.retriever.initialize()
-            
-            logger.info("FAQ agent initialized")
+            try:
+                await self.retriever.initialize()
+                logger.info("FAQ agent initialized with RAG retriever")
+            except Exception as retriever_error:
+                logger.warning("Failed to initialize RAG retriever, FAQ agent will work without it", error=str(retriever_error))
+                self.retriever = None
             
         except Exception as e:
             logger.error("Failed to initialize FAQ agent", error=str(e), exc_info=True)
@@ -59,13 +67,30 @@ class FAQAgent:
         try:
             logger.info("Processing FAQ query", session_id=session_id)
             
-            # Retrieve relevant documents
-            retrieved_docs = await self.retriever.retrieve(query, top_k=settings.top_k_results)
+            # Retrieve relevant documents if retriever is available
+            retrieved_docs = []
+            if self.retriever:
+                retrieved_docs = await self.retriever.retrieve(query, top_k=settings.top_k_results)
+            else:
+                logger.info("RAG retriever not available, responding without context")
             
             if not retrieved_docs:
+                # If no retriever or no documents found, provide a general response
+                if not self.retriever:
+                    fallback_response = """I'm here to help with general questions about trading and financial services. 
+                    However, my knowledge base is currently not available. I can still try to help with basic questions about:
+                    - Account management
+                    - Trading basics
+                    - Platform features
+                    - General financial terms
+                    
+                    Please ask your question and I'll do my best to help!"""
+                else:
+                    fallback_response = "I don't have information about that in my knowledge base. Could you rephrase or ask something else?"
+                
                 return {
-                    "response": "I don't have information about that in my knowledge base. Could you rephrase or ask something else?",
-                    "tools_used": ["rag_retriever"],
+                    "response": fallback_response,
+                    "tools_used": ["rag_retriever"] if self.retriever else [],
                     "confidence": 0.0
                 }
             
@@ -76,7 +101,14 @@ class FAQAgent:
             ])
             
             # Generate response
-            prompt = f"""You are a helpful assistant for a financial trading platform. Use the following context to answer the user's question accurately and concisely.
+            if not self.llm:
+                # If no LLM available, return a basic response with retrieved content
+                if retrieved_docs:
+                    response_content = f"Based on the available information:\n\n{retrieved_docs[0]['content']}\n\nNote: Full AI response generation is currently unavailable."
+                else:
+                    response_content = "I'm sorry, but I'm currently unable to process your request as the AI service is not available."
+            else:
+                prompt = f"""You are a helpful assistant for a financial trading platform. Use the following context to answer the user's question accurately and concisely.
 
 Context:
 {context}
@@ -90,9 +122,10 @@ Instructions:
 - Use a professional but friendly tone
 
 Answer:"""
-            
-            messages = [SystemMessage(content=prompt)]
-            response = await self.llm.ainvoke(messages)
+                
+                messages = [SystemMessage(content=prompt)]
+                response = await self.llm.ainvoke(messages)
+                response_content = response.content
             
             latency = (time.time() - start_time) * 1000
             
@@ -104,8 +137,8 @@ Answer:"""
             )
             
             return {
-                "response": response.content,
-                "tools_used": ["rag_retriever"],
+                "response": response_content,
+                "tools_used": ["rag_retriever"] if self.retriever else [],
                 "confidence": retrieved_docs[0].get("score", 0.0) if retrieved_docs else 0.0,
                 "sources": [doc.get("source", "Unknown") for doc in retrieved_docs[:3]],
                 "latency_ms": latency

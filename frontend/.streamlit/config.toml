@@ -1,0 +1,20 @@
+# Streamlit Configuration
+
+[theme]
+primaryColor = "#2196f3"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f2f6"
+textColor = "#262730"
+font = "sans serif"
+
+[server]
+port = 8501
+address = "0.0.0.0"
+headless = true
+runOnSave = true
+maxUploadSize = 10
+
+[browser]
+gatherUsageStats = false
+serverAddress = "localhost"
+serverPort = 8501

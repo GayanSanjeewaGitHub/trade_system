@@ -2,10 +2,12 @@
 RAG Retriever - Handles semantic search and document retrieval.
 """
 
+import asyncio
 from typing import List, Dict, Any, Optional
 from pinecone import Pinecone, ServerlessSpec
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
+from langchain_community.vectorstores import FAISS
 
 from src.config.settings import settings
 from src.monitoring.logger import get_logger
@@ -14,58 +16,110 @@ logger = get_logger(__name__)
 
 
 class RAGRetriever:
-    """RAG retriever using Pinecone vector database."""
+    """RAG retriever using Pinecone vector database with FAISS fallback."""
     
     def __init__(self):
         self.pc: Optional[Pinecone] = None
         self.index = None
         self.embeddings: Optional[OpenAIEmbeddings] = None
         self.vector_store: Optional[PineconeVectorStore] = None
+        self.use_faiss_fallback: bool = False
     
     async def initialize(self) -> None:
-        """Initialize Pinecone connection and embeddings."""
+        """Initialize Pinecone connection and embeddings with FAISS fallback."""
         try:
             logger.info("Initializing RAG retriever")
             
-            # Initialize Pinecone
-            self.pc = Pinecone(api_key=settings.pinecone_api_key)
+            # Check if we have valid API keys
+            if not settings.openai_api_key or settings.openai_api_key == "your-openai-api-key":
+                logger.warning("OpenAI API key not configured, RAG retriever will be disabled")
+                return
             
-            # Create or get index
-            index_name = settings.pinecone_index_name
-            
-            if index_name not in [idx.name for idx in self.pc.list_indexes()]:
-                logger.info("Creating new Pinecone index", index_name=index_name)
-                
-                self.pc.create_index(
-                    name=index_name,
-                    dimension=settings.pinecone_dimension,
-                    metric=settings.pinecone_metric,
-                    spec=ServerlessSpec(
-                        cloud=settings.pinecone_cloud,
-                        region=settings.pinecone_region
-                    )
-                )
-            
-            self.index = self.pc.Index(index_name)
-            
-            # Initialize embeddings
+            # Initialize embeddings first (with max_retries to handle session issues)
             self.embeddings = OpenAIEmbeddings(
                 model=settings.embedding_model,
-                api_key=settings.openai_api_key
+                api_key=settings.openai_api_key,
+                max_retries=3,
+                timeout=60
             )
             
-            # Initialize vector store
-            self.vector_store = PineconeVectorStore(
-                index=self.index,
-                embedding=self.embeddings,
-                text_key="content"
-            )
+            # Try to initialize Pinecone
+            if not settings.pinecone_api_key or settings.pinecone_api_key == "your-pinecone-api-key" or settings.pinecone_api_key == "YOUR_ACTUAL_PINECONE_API_KEY_HERE":
+                logger.warning("Pinecone API key not configured, using FAISS in-memory fallback")
+                self.use_faiss_fallback = True
+                await self._initialize_faiss()
+                return
             
-            logger.info("RAG retriever initialized successfully")
+            try:
+                # Initialize Pinecone
+                self.pc = Pinecone(api_key=settings.pinecone_api_key)
+                
+                # Create or get index
+                index_name = settings.pinecone_index_name
+                
+                existing_indexes = [idx.name for idx in self.pc.list_indexes()]
+                if index_name not in existing_indexes:
+                    logger.info("Creating new Pinecone index", index_name=index_name)
+                    
+                    self.pc.create_index(
+                        name=index_name,
+                        dimension=settings.pinecone_dimension,
+                        metric=settings.pinecone_metric,
+                        spec=ServerlessSpec(
+                            cloud=settings.pinecone_cloud,
+                            region=settings.pinecone_region
+                        )
+                    )
+                
+                self.index = self.pc.Index(index_name)
+                
+                # Initialize vector store
+                self.vector_store = PineconeVectorStore(
+                    index=self.index,
+                    embedding=self.embeddings,
+                    text_key="content"
+                )
+                
+                logger.info("RAG retriever initialized successfully with Pinecone")
+                
+            except Exception as pinecone_error:
+                logger.warning(
+                    "Failed to connect to Pinecone, falling back to FAISS in-memory store",
+                    error=str(pinecone_error)
+                )
+                self.use_faiss_fallback = True
+                await self._initialize_faiss()
             
         except Exception as e:
-            logger.error("Failed to initialize RAG retriever", error=str(e), exc_info=True)
+            logger.error("Failed to initialize retriever", error=str(e), exc_info=True)
             raise
+    
+    async def _initialize_faiss(self) -> None:
+        """Initialize FAISS in-memory vector store as fallback."""
+        try:
+            logger.info("Initializing FAISS in-memory vector store")
+            
+            # Create an empty FAISS store (run in thread pool to avoid blocking)
+            # We'll initialize it with a dummy document first
+            dummy_texts = ["Initialization document"]
+            dummy_metadatas = [{"type": "system", "purpose": "initialization"}]
+            
+            self.vector_store = await asyncio.to_thread(
+                FAISS.from_texts,
+                texts=dummy_texts,
+                embedding=self.embeddings,
+                metadatas=dummy_metadatas
+            )
+            
+            logger.info("FAISS vector store initialized successfully")
+            
+        except Exception as e:
+            logger.error("Failed to initialize FAISS", error=str(e), exc_info=True)
+            raise
+            
+        except Exception as e:
+            logger.warning("Failed to initialize RAG retriever, continuing without it", error=str(e))
+            # Don't raise the exception, just log and continue
     
     async def retrieve(
         self,
@@ -85,14 +139,27 @@ class RAGRetriever:
             List of relevant documents with scores
         """
         try:
+            if not self.vector_store:
+                logger.warning("Vector store not initialized, returning empty results")
+                return []
+                
             logger.info("Retrieving documents", query_length=len(query), top_k=top_k)
             
-            # Search in vector store
-            results = await self.vector_store.asimilarity_search_with_score(
-                query=query,
-                k=top_k,
-                filter=filter_dict
-            )
+            # Search in vector store (use sync method for FAISS, async for Pinecone)
+            if self.use_faiss_fallback:
+                # Run synchronous FAISS operation in thread pool to avoid blocking
+                results = await asyncio.to_thread(
+                    self.vector_store.similarity_search_with_score,
+                    query=query,
+                    k=top_k,
+                    filter=filter_dict
+                )
+            else:
+                results = await self.vector_store.asimilarity_search_with_score(
+                    query=query,
+                    k=top_k,
+                    filter=filter_dict
+                )
             
             # Format results
             formatted_results = []
@@ -131,16 +198,32 @@ class RAGRetriever:
             Result dict with success status
         """
         try:
+            if not self.vector_store:
+                logger.warning("Vector store not initialized, cannot add documents")
+                return {
+                    "success": False,
+                    "error": "Vector store not initialized"
+                }
+                
             logger.info("Adding documents to vector store", count=len(documents))
             
             texts = [doc["content"] for doc in documents]
             metadatas = [doc.get("metadata", {}) for doc in documents]
             
-            # Add to vector store
-            ids = await self.vector_store.aadd_texts(
-                texts=texts,
-                metadatas=metadatas
-            )
+            # Add to vector store (use sync method for FAISS, async for Pinecone)
+            if self.use_faiss_fallback:
+                # Run synchronous FAISS operation in thread pool to avoid blocking
+                await asyncio.to_thread(
+                    self.vector_store.add_texts,
+                    texts=texts,
+                    metadatas=metadatas
+                )
+                ids = [f"faiss_{i}" for i in range(len(texts))]
+            else:
+                ids = await self.vector_store.aadd_texts(
+                    texts=texts,
+                    metadatas=metadatas
+                )
             
             logger.info("Documents added successfully", ids_count=len(ids))
             
@@ -160,6 +243,20 @@ class RAGRetriever:
     async def delete_documents(self, ids: List[str]) -> Dict[str, Any]:
         """Delete documents by IDs."""
         try:
+            if self.use_faiss_fallback:
+                logger.warning("FAISS fallback mode: delete operation not supported")
+                return {
+                    "success": False,
+                    "error": "Delete operation not supported in FAISS fallback mode"
+                }
+            
+            if not self.index:
+                logger.warning("Pinecone index not initialized, cannot delete documents")
+                return {
+                    "success": False,
+                    "error": "Pinecone index not initialized"
+                }
+                
             logger.info("Deleting documents", count=len(ids))
             
             self.index.delete(ids=ids)
@@ -175,9 +272,24 @@ class RAGRetriever:
     async def get_stats(self) -> Dict[str, Any]:
         """Get index statistics."""
         try:
+            if self.use_faiss_fallback:
+                if self.vector_store:
+                    return {
+                        "mode": "FAISS (in-memory)",
+                        "total_vectors": self.vector_store.index.ntotal,
+                        "dimension": 1536,
+                        "index_fullness": 0.0
+                    }
+                return {"mode": "FAISS", "status": "not initialized"}
+            
+            if not self.index:
+                logger.warning("Pinecone index not initialized, cannot get stats")
+                return {}
+                
             stats = self.index.describe_index_stats()
             
             return {
+                "mode": "Pinecone",
                 "total_vectors": stats.get("total_vector_count", 0),
                 "dimension": stats.get("dimension", 0),
                 "index_fullness": stats.get("index_fullness", 0.0)

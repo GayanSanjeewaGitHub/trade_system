@@ -33,14 +33,14 @@ class Settings(BaseSettings):
     max_request_size: int = 10485760  # 10MB
 
     # LLM Configuration
-    openai_api_key: str
+    openai_api_key: str = "your-openai-api-key"
     llm_model: str = "gpt-4-turbo-preview"
     llm_temperature: float = 0.7
     llm_max_tokens: int = 2000
     llm_timeout: int = 60
 
     # Pinecone Configuration
-    pinecone_api_key: str
+    pinecone_api_key: str = "your-pinecone-api-key"
     pinecone_environment: str = "gcp-starter"
     pinecone_index_name: str = "trading-chatbot-index"
     pinecone_dimension: int = 1536
@@ -49,8 +49,8 @@ class Settings(BaseSettings):
     pinecone_region: str = "us-east-1"
 
     # Langfuse Configuration
-    langfuse_public_key: str
-    langfuse_secret_key: str
+    langfuse_public_key: str = "your-langfuse-public-key"
+    langfuse_secret_key: str = "your-langfuse-secret-key"
     langfuse_host: str = "https://cloud.langfuse.com"
     langfuse_enabled: bool = True
 
@@ -79,12 +79,12 @@ class Settings(BaseSettings):
     mcp_enabled: bool = True
 
     # Rate Limiting
-    rate_limit_per_minute: int = 60
-    rate_limit_per_hour: int = 1000
+    rate_limit_per_minute: int = 60000
+    rate_limit_per_hour: int = 100000
 
     # Session Management
-    session_timeout: int = 3600  # 1 hour
-    max_conversation_history: int = 50
+    session_timeout: int = 36000  # 1 hour
+    max_conversation_history: int = 500
 
     # Monitoring & Evaluation
     enable_auto_eval: bool = True
