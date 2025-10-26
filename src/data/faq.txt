@@ -17,6 +17,22 @@ A: A Client Account in CDS can be opened by a person who is 18 years or above, d
 Q: How do I create a CDS account?
 A: You can create a CDS account by contacting any of the 29 licensed stock broking firms (including one Debt Trading Member of the CSE) or a custodian bank. The duly completed Client Account Opening Forms together with the relevant supporting documents (copy of the national identity card and a billing proof) must be handed over to the stockbroker or a custodian bank. Read and understand the contents of the forms prior to submission. The CDS system will generate a Client Account Number and this would be handed over to the stockbroker or a custodian bank confirming the CDS account opening.
 
+Q: How do I open a CSE trading account using the mobile app?
+A: To open a Colombo Stock Exchange (CSE) trading account, download the CSE mobile app, select a stockbroker like Asia Securities, and complete the online application. You will need to provide personal information, bank account details, and upload required documents such as your NIC and proof of residency, then confirm the terms and conditions before submitting.
+
+**Step-by-Step Guide:**
+1. Download the CSE mobile app: Get the app from the Apple App Store or Google Play Store.
+2. Choose a stockbroker: During the application process, select your preferred stockbroker, such as Asia Securities.
+3. Complete the application: Fill in your personal information, residential details, bank account information, and employment details.
+4. Complete the PEPs questionnaire: Answer the questions to determine if you are a Politically Exposed Person (PEPs).
+5. Upload required documents:
+   - A selfie
+   - Your National Identity Card (NIC)
+   - Proof of residency
+   - A bank book or statement showing your account details
+6. Review and submit: Read and agree to the terms and conditions, then submit your application.
+7. Verification: The CSE will verify your information and grant you access to your account, allowing you to start trading, sometimes within 24 hours.
+
 Q: What is the role of a Stock Broker Firm?
 A: An investor is not permitted to directly transact in securities listed on the CSE. Instead, investors are required to carry out transactions through authorized Stock Broker Firms. These firms execute buy and sell orders on your behalf, provide market research, and offer investment advice.
 

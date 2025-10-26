@@ -173,8 +173,12 @@ class RAGRetriever:
             
             # Format results
             formatted_results = []
+            all_scores = []
             for doc, score in results:
-                if score >= settings.similarity_threshold:
+                all_scores.append(float(score))
+                # Include all results, let the agent decide relevance
+                # Only filter out extremely low scores (< 0.3 for cosine similarity)
+                if score >= 0.3:
                     formatted_results.append({
                         "content": doc.page_content,
                         "metadata": doc.metadata,
@@ -185,7 +189,9 @@ class RAGRetriever:
             logger.info(
                 "Documents retrieved",
                 count=len(formatted_results),
-                avg_score=sum(r["score"] for r in formatted_results) / len(formatted_results) if formatted_results else 0
+                total_found=len(results),
+                avg_score=sum(r["score"] for r in formatted_results) / len(formatted_results) if formatted_results else 0,
+                all_scores=all_scores[:5]  # Log first 5 scores for debugging
             )
             
             return formatted_results

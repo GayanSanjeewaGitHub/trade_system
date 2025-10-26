@@ -4,8 +4,11 @@ Implements LangGraph state machine for complex multi-agent workflows.
 """
 
 import time
+import asyncio
 from typing import Dict, List, Any, Optional, Annotated
 from operator import add
+from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_openai import ChatOpenAI
@@ -25,6 +28,116 @@ from src.monitoring.logger import get_logger
 from src.utils.helpers import generate_session_id
 
 logger = get_logger(__name__)
+
+
+# Cache keyword sets for performance (rebuilt only when settings change)
+@lru_cache(maxsize=2)
+def _get_keyword_set(keyword_type: str) -> set:
+    """
+    Get cached set of keywords for faster lookup.
+    Uses LRU cache to avoid rebuilding sets on every classification.
+    
+    Args:
+        keyword_type: Either 'advisor' or 'faq'
+    
+    Returns:
+        Set of lowercase keywords
+    """
+    if keyword_type == 'advisor':
+        return set(k.strip().lower() for k in settings.advisor_keywords.split(",") if k.strip())
+    elif keyword_type == 'faq':
+        return set(k.strip().lower() for k in settings.faq_keywords.split(",") if k.strip())
+    return set()
+
+
+def _check_keywords_match(user_input_lower: str, keywords: set, intent_name: str) -> Optional[str]:
+    """
+    Check if any keyword matches in user input.
+    Optimized for early termination.
+    
+    Args:
+        user_input_lower: Lowercase user input
+        keywords: Set of keywords to check
+        intent_name: Name of intent to return if matched
+    
+    Returns:
+        Intent name if match found, None otherwise
+    """
+    for keyword in keywords:
+        if keyword in user_input_lower:
+            return intent_name
+    return None
+
+
+async def _parallel_keyword_classification(user_input_lower: str) -> str:
+    """
+    Classify intent by checking advisor and FAQ keywords in parallel.
+    Uses asyncio to run both checks concurrently and returns as soon as one matches.
+    
+    Args:
+        user_input_lower: Lowercase user input
+    
+    Returns:
+        Intent classification ('ADVISOR' or 'FAQ')
+    """
+    # Get cached keyword sets
+    advisor_keywords = _get_keyword_set('advisor')
+    faq_keywords = _get_keyword_set('faq')
+    
+    # Create tasks for parallel execution
+    loop = asyncio.get_event_loop()
+    
+    # Run keyword checks in thread pool for CPU-bound operations
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        advisor_task = loop.run_in_executor(
+            executor,
+            _check_keywords_match,
+            user_input_lower,
+            advisor_keywords,
+            "ADVISOR"
+        )
+        
+        faq_task = loop.run_in_executor(
+            executor,
+            _check_keywords_match,
+            user_input_lower,
+            faq_keywords,
+            "FAQ"
+        )
+        
+        # Wait for first match or both to complete
+        # Priority: ADVISOR > FAQ (check advisor first)
+        done, pending = await asyncio.wait(
+            [advisor_task, faq_task],
+            return_when=asyncio.FIRST_COMPLETED
+        )
+        
+        # Check if advisor matched first
+        for task in done:
+            result = task.result()
+            if result == "ADVISOR":
+                # Cancel pending tasks
+                for pending_task in pending:
+                    pending_task.cancel()
+                return "ADVISOR"
+        
+        # Wait for remaining task
+        for task in pending:
+            try:
+                result = await task
+                if result:
+                    return result
+            except asyncio.CancelledError:
+                pass
+        
+        # Check results from completed tasks
+        for task in done:
+            result = task.result()
+            if result:
+                return result
+    
+    # Default to FAQ if no match found
+    return "FAQ"
 
 
 class AgentState(Dict):
@@ -251,23 +364,13 @@ class ControllerAgent:
             user_input = state["user_input"]
             
             if not self.llm:
-                # Keyword-based classification using configurable keywords from settings
+                # Optimized keyword-based classification with parallel search
                 user_input_lower = user_input.lower()
                 
-                # Get keyword lists from settings
-                advisor_keywords = settings.get_advisor_keywords_list()
-                faq_keywords = settings.get_faq_keywords_list()
-                
-                # Check for advisor keywords first
-                if any(keyword in user_input_lower for keyword in advisor_keywords):
-                    intent = "ADVISOR"
-                # Check for FAQ keywords, or default to FAQ
-                elif any(keyword in user_input_lower for keyword in faq_keywords) or True:
-                    intent = "FAQ"
-                else:
-                    intent = "FAQ"  # Default fallback
+                # Use parallel keyword matching for faster classification
+                intent = await _parallel_keyword_classification(user_input_lower)
                     
-                logger.info("Intent classified using keywords", intent=intent)
+                logger.info("Intent classified using parallel keyword matching", intent=intent)
             else:
                 classification_prompt = f"""Analyze the following user message and classify it into one of these categories:
 
